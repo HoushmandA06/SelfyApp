@@ -18,6 +18,9 @@
 {
     UITextField * nameField;
     UITextField * pwField;
+
+    UIView * loginForm;
+
     
 }
 
@@ -26,7 +29,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
 
-        self.view.backgroundColor = [UIColor orangeColor];
+        self.view.backgroundColor = [UIColor colorWithRed:0.318f green:0.659f blue:1.000f alpha:1.0f];
         
         nameField = [[UITextField alloc] initWithFrame:CGRectMake(40,100,240,40)];
         nameField.backgroundColor = [UIColor lightGrayColor];
@@ -62,8 +65,6 @@
   
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
         [self.view addGestureRecognizer:tap];
-
-    
         
     }
     return self;
@@ -82,6 +83,8 @@
     
     [nameField resignFirstResponder];
     [pwField resignFirstResponder];
+
+    
 }
 
 
@@ -102,8 +105,6 @@
     return YES;
 }
 
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -116,15 +117,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

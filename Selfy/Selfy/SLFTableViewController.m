@@ -16,12 +16,8 @@
 
 @implementation SLFTableViewController
 {
-    
     NSMutableArray * listItems;
-    
-    
 }
-
 
 - (id)initWithStyle:(UITableViewStyle)style
 {

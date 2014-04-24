@@ -32,9 +32,6 @@
 
     //Override point for customization after application launch.
     
-
-    
-    
     // self.window.rootViewController = [[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
     // self.window.rootViewController = [[SLFLoginVC alloc] initWithNibName:nil bundle:nil];

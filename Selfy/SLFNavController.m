@@ -14,7 +14,8 @@
 
 @implementation SLFNavController
 {
-
+    //UIViewController * TVC;
+    
 }
 
 
@@ -30,6 +31,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [self.navigationBar removeFromSuperview];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -39,10 +43,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-//-(void)addTableViewController:(SLFTableViewController *)viewController
-//{
-//   
-//}
+
+
 
 
 
