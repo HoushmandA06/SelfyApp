@@ -83,6 +83,10 @@
     
     [nameField resignFirstResponder];
     [pwField resignFirstResponder];
+    
+    SLF = [[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    self.view = SLF.view;
+    
 }
 
 
