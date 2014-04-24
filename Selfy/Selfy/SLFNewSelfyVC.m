@@ -108,7 +108,11 @@
 
 -(void)newSelfy
 {
-
+    //PFObject "UserSelfy"
+    //put a png file inside the app
+    //PFFile used to save/load
+    //
+    
 }
 
 

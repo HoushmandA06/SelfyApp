@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Ali Houshmand. All rights reserved.
 //
 
+#import "SLFTableViewController.h"
 #import "SLFLoginVC.h"
 #import <Parse/Parse.h>
 
@@ -75,13 +76,45 @@
     PFUser * user = [PFUser currentUser];
     user.username = nameField.text;
     user.password = pwField.text;
-    [user saveInBackground];
     
-    NSLog(@"clicking");
-    NSLog(@"%@ : %@",nameField.text,pwField.text);
+    nameField.text = nil;
+    pwField.text = nil;
     
+        
     [nameField resignFirstResponder];
     [pwField resignFirstResponder];
+    
+    UIActivityIndicatorView *ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    ai.center = self.view.center;
+    ai.color = [UIColor blueColor];
+    ai.frame = CGRectMake(160, 200, 75.0, 75.0);
+    [ai startAnimating];
+    [self.view addSubview:ai];
+    
+    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+      
+    if (error == nil)
+      {
+          self.navigationController.navigationBarHidden = NO;
+          self.navigationController.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
+          
+          
+          
+      } else {
+        
+          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"User error" message:@"Unable to Add User" delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
+          [alertView show];
+          
+          [ai removeFromSuperview];
+          
+          // error.userInfo[@"error"]
+      }
+          
+      }];
+
+    NSLog(@"clicking");
+    NSLog(@"%@ : %@",nameField.text,pwField.text);
+
 }
 
 

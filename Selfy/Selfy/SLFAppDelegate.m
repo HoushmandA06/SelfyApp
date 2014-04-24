@@ -21,8 +21,15 @@
    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    [Parse setApplicationId:@"H1JHLiA7kFRmIWvtbkHDcnA1Caj4UofHxRx6UZAB"
-                  clientKey:@"dKLyXccYHUy1MXNgrdR2Sq5b1fNQoTr4clSXVd3p"];
+    
+    // Jo's app key
+//    [Parse setApplicationId:@"H1JHLiA7kFRmIWvtbkHDcnA1Caj4UofHxRx6UZAB"
+//                  clientKey:@"dKLyXccYHUy1MXNgrdR2Sq5b1fNQoTr4clSXVd3p"];
+    
+    //my app key from Parse
+    [Parse setApplicationId:@"Gqwcxe2TsYrgWuz4k0FYmC42Fan860UqDU7TQD6k"
+                  clientKey:@"VSYAhicPhIwwWaQqaq1202RyhzMZHRObqmVOZWak"];
+
     
     [PFUser enableAutomaticUser];
 
@@ -32,7 +39,32 @@
     
     // self.window.rootViewController = [[SLFLoginVC alloc] initWithNibName:nil bundle:nil];
     
-       self.window.rootViewController = [[SLFNewSelfyVC alloc] initWithNibName:nil bundle:nil];
+    // self.window.rootViewController = [[SLFNewSelfyVC alloc] initWithNibName:nil bundle:nil];
+    
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:[[SLFLoginVC alloc]
+                                                                                         initWithNibName:nil bundle:nil]];
+    
+    // use to work on new selfy
+//    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:[[SLFNewSelfyVC alloc] initWithNibName:nil bundle:nil]];
+    
+    
+    PFUser * user = [PFUser currentUser];
+    NSString * username = user.username;
+    
+    username = nil;
+    
+    
+    if(username == nil)
+    {
+        navController = [[UINavigationController alloc] initWithRootViewController:[[SLFLoginVC alloc]
+                                                                                    initWithNibName:nil bundle:nil]];
+        navController.navigationBarHidden = YES;
+    } else {
+        navController = [[UINavigationController alloc] initWithRootViewController:[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
+    }
+    
+    self.window.rootViewController = navController;
+
     
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
