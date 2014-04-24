@@ -10,6 +10,7 @@
 		0FA7FEBE1906D1E600CC0A8C /* newuser.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA7FEBD1906D1E600CC0A8C /* newuser.png */; };
 		0FA7FEC21906D2F400CC0A8C /* SLFLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7FEC11906D2F400CC0A8C /* SLFLoginVC.m */; };
 		0FA7FEC51906D31A00CC0A8C /* SLFNewSelfyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7FEC41906D31A00CC0A8C /* SLFNewSelfyVC.m */; };
+		0FA7FF1819098B9D00CC0A8C /* SLFNavController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7FF1719098B9D00CC0A8C /* SLFNavController.m */; };
 		0FABCFBD190588E400B39854 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFBC190588E400B39854 /* Foundation.framework */; };
 		0FABCFBF190588E400B39854 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFBE190588E400B39854 /* CoreGraphics.framework */; };
 		0FABCFC1190588E400B39854 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFC0190588E400B39854 /* UIKit.framework */; };
@@ -54,6 +55,8 @@
 		0FA7FEC11906D2F400CC0A8C /* SLFLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFLoginVC.m; sourceTree = "<group>"; };
 		0FA7FEC31906D31A00CC0A8C /* SLFNewSelfyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFNewSelfyVC.h; sourceTree = "<group>"; };
 		0FA7FEC41906D31A00CC0A8C /* SLFNewSelfyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFNewSelfyVC.m; sourceTree = "<group>"; };
+		0FA7FF1619098B9D00CC0A8C /* SLFNavController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SLFNavController.h; path = ../SLFNavController.h; sourceTree = "<group>"; };
+		0FA7FF1719098B9D00CC0A8C /* SLFNavController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SLFNavController.m; path = ../SLFNavController.m; sourceTree = "<group>"; };
 		0FABCFB9190588E400B39854 /* Selfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Selfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FABCFBC190588E400B39854 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0FABCFBE190588E400B39854 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -180,9 +183,11 @@
 				0FABCFEC1905892C00B39854 /* SLFTableViewController.m */,
 				0FABCFEE19059A6000B39854 /* SLFTableViewCell.h */,
 				0FABCFEF19059A6000B39854 /* SLFTableViewCell.m */,
+				0FA7FEBF1906D2AD00CC0A8C /* Additional VCs */,
+				0FA7FF1619098B9D00CC0A8C /* SLFNavController.h */,
+				0FA7FF1719098B9D00CC0A8C /* SLFNavController.m */,
 				0FABCFCB190588E400B39854 /* SLFAppDelegate.h */,
 				0FABCFCC190588E400B39854 /* SLFAppDelegate.m */,
-				0FA7FEBF1906D2AD00CC0A8C /* Additional VCs */,
 				0FABCFCE190588E400B39854 /* Images.xcassets */,
 				0FABCFC3190588E400B39854 /* Supporting Files */,
 			);
@@ -321,6 +326,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0FA7FEC21906D2F400CC0A8C /* SLFLoginVC.m in Sources */,
+				0FA7FF1819098B9D00CC0A8C /* SLFNavController.m in Sources */,
 				0FABCFCD190588E400B39854 /* SLFAppDelegate.m in Sources */,
 				0FABCFF019059A6000B39854 /* SLFTableViewCell.m in Sources */,
 				0FABCFC9190588E400B39854 /* main.m in Sources */,
