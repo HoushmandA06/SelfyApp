@@ -41,27 +41,32 @@
     
     // self.window.rootViewController = [[SLFNewSelfyVC alloc] initWithNibName:nil bundle:nil];
     
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:[[SLFLoginVC alloc]
-                                                                                         initWithNibName:nil bundle:nil]];
+   //  UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:[[SLFLoginVC alloc]
+      //                                                                                   initWithNibName:nil bundle:nil]];
     
     // use to work on new selfy
-//    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:[[SLFNewSelfyVC alloc] initWithNibName:nil bundle:nil]];
     
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:[[SLFNewSelfyVC alloc] initWithNibName:nil bundle:nil]];
+    navController.navigationBarHidden = YES;
     
     PFUser * user = [PFUser currentUser];
+   
+    
+    
     NSString * username = user.username;
     
-    username = nil;
+     username = nil;
     
-    
-    if(username == nil)
-    {
-        navController = [[UINavigationController alloc] initWithRootViewController:[[SLFLoginVC alloc]
-                                                                                    initWithNibName:nil bundle:nil]];
-        navController.navigationBarHidden = YES;
-    } else {
-        navController = [[UINavigationController alloc] initWithRootViewController:[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
-    }
+//     I am commenting the below because i dont want to go to the LOGINVC
+
+//    if(username == nil)
+//    {
+//        navController = [[UINavigationController alloc] initWithRootViewController:[[SLFLoginVC alloc]
+//                                                                                    initWithNibName:nil bundle:nil]];
+//        navController.navigationBarHidden = YES;
+//    } else {
+//        navController = [[UINavigationController alloc] initWithRootViewController:[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
+//    }
     
     self.window.rootViewController = navController;
 

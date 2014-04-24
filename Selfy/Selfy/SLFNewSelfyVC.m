@@ -7,6 +7,8 @@
 //
 
 #import "SLFNewSelfyVC.h"
+#import <Parse/Parse.h>
+
 
 @interface SLFNewSelfyVC ()
 
@@ -17,6 +19,9 @@
     UITextView * newCaption;
     
     UIView *newForm;
+    
+    UIImageView * newImageFrame;
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -48,7 +53,7 @@
     [submitNew setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [submitNew setTitle:@"Submit" forState:UIControlStateNormal];
     submitNew.layer.cornerRadius = 6;
-    //[newImage addTarget:self action:@selector(newSelfy) forControlEvents:UIControlEventTouchUpInside];
+    [submitNew addTarget:self action:@selector(newSelfy) forControlEvents:UIControlEventTouchUpInside];
     [newForm addSubview:submitNew];
         
     UIButton * cancelNew = [[UIButton alloc] initWithFrame:CGRectMake(180, 360, 100, 40)];
@@ -56,10 +61,10 @@
     [cancelNew setTitle:@"Cancel" forState:UIControlStateNormal];
     [cancelNew setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     cancelNew.layer.cornerRadius = 6;
-    //[newImage addTarget:self action:@selector(newSelfy) forControlEvents:UIControlEventTouchUpInside];
+    //[cancelNew addTarget:self action:@selector(newSelfy) forControlEvents:UIControlEventTouchUpInside];
     [newForm addSubview:cancelNew];
                 
-    UIImageView * newImageFrame = [[UIImageView alloc] initWithFrame:CGRectMake(60,60,200,200)];
+    newImageFrame = [[UIImageView alloc] initWithFrame:CGRectMake(60,60,200,200)];
     newImageFrame.layer.cornerRadius = 6;
     newImageFrame.contentMode = UIViewContentModeCenter;
     newImageFrame.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
@@ -108,10 +113,25 @@
 
 -(void)newSelfy
 {
-    //PFObject "UserSelfy"
-    //put a png file inside the app
-    //PFFile used to save/load
-    //
+   
+    UIImage *image = [UIImage imageNamed:@"greenmonster"];
+    
+    NSData *imageData = UIImagePNGRepresentation(image);
+    
+    PFFile *imageFile = [PFFile fileWithName:@"greenmonster.png" data:imageData];
+    
+    PFObject *userPhoto = [PFObject objectWithClassName:@"UserSelfy"];
+    userPhoto[@"imageName"] = @"My Green Monster";
+    userPhoto[@"imageFile"] = imageFile;
+    [userPhoto saveInBackground];
+    
+//    PFFile *userImageFile = anotherPhoto[@"imageFile"];
+//    [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+//        if (!error) {
+//            UIImage *image = [UIImage imageWithData:imageData];
+//        }
+//    }];
+
     
 }
 
@@ -136,6 +156,11 @@
 //    return YES;
 //}
 
+
+-(BOOL)prefersStatusBarHidden
+{
+    return YES;
+}
 
 
 - (void)viewDidLoad

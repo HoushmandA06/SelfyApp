@@ -98,14 +98,22 @@
           self.navigationController.navigationBarHidden = NO;
           self.navigationController.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
           
-          
-          
       } else {
         
-          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"User error" message:@"Unable to Add User" delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
+//          NSDictionary *parsedResponse = [error.userInfo objectForKey:@"error"];
+//          
+//          int parsedErrorCode = [[[[parsedResponse objectForKey:@"body"]
+//                                   objectForKey:@"error"]
+//                                  objectForKey:@"code"]
+//                                 intValue];
+          
+          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"User error" message:@"u screwed up" delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil]; // need to link parse error code in here somehow
           [alertView show];
           
           [ai removeFromSuperview];
+          
+     
+          
           
           // error.userInfo[@"error"]
       }

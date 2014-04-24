@@ -10,6 +10,7 @@
 		0FA7FEBE1906D1E600CC0A8C /* newuser.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA7FEBD1906D1E600CC0A8C /* newuser.png */; };
 		0FA7FEC21906D2F400CC0A8C /* SLFLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7FEC11906D2F400CC0A8C /* SLFLoginVC.m */; };
 		0FA7FEC51906D31A00CC0A8C /* SLFNewSelfyVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7FEC41906D31A00CC0A8C /* SLFNewSelfyVC.m */; };
+		0FA7FF1A1909D0FD00CC0A8C /* greenmonster.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA7FF191909D0FD00CC0A8C /* greenmonster.png */; };
 		0FABCFBD190588E400B39854 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFBC190588E400B39854 /* Foundation.framework */; };
 		0FABCFBF190588E400B39854 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFBE190588E400B39854 /* CoreGraphics.framework */; };
 		0FABCFC1190588E400B39854 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFC0190588E400B39854 /* UIKit.framework */; };
@@ -54,6 +55,7 @@
 		0FA7FEC11906D2F400CC0A8C /* SLFLoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFLoginVC.m; sourceTree = "<group>"; };
 		0FA7FEC31906D31A00CC0A8C /* SLFNewSelfyVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFNewSelfyVC.h; sourceTree = "<group>"; };
 		0FA7FEC41906D31A00CC0A8C /* SLFNewSelfyVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFNewSelfyVC.m; sourceTree = "<group>"; };
+		0FA7FF191909D0FD00CC0A8C /* greenmonster.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = greenmonster.png; path = ../../../../../Downloads/greenmonster.png; sourceTree = "<group>"; };
 		0FABCFB9190588E400B39854 /* Selfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Selfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FABCFBC190588E400B39854 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0FABCFBE190588E400B39854 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -196,6 +198,7 @@
 				0FABCFC5190588E400B39854 /* InfoPlist.strings */,
 				0FABCFC8190588E400B39854 /* main.m */,
 				0FABCFCA190588E400B39854 /* Selfy-Prefix.pch */,
+				0FA7FF191909D0FD00CC0A8C /* greenmonster.png */,
 				0FABCFF11905AC9000B39854 /* image.png */,
 				0FA7FEBD1906D1E600CC0A8C /* newuser.png */,
 				0FABCFF21905AC9000B39854 /* gear.png */,
@@ -301,6 +304,7 @@
 				0FABCFCF190588E400B39854 /* Images.xcassets in Resources */,
 				0FABCFF41905AC9000B39854 /* gear.png in Resources */,
 				0FABCFF31905AC9000B39854 /* image.png in Resources */,
+				0FA7FF1A1909D0FD00CC0A8C /* greenmonster.png in Resources */,
 				0FA7FEBE1906D1E600CC0A8C /* newuser.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
