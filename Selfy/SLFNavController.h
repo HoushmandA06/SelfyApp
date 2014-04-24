@@ -12,7 +12,4 @@
 
 @interface SLFNavController : UINavigationController
 
-//-(void)addTableViewController:(SLFTableViewController *)viewController;
-
-
 @end

@@ -8,7 +8,7 @@
 
 #import "SLFLoginVC.h"
 #import <Parse/Parse.h>
-
+#import "SLFTableViewController.h"
 
 @interface SLFLoginVC ()
 
@@ -21,6 +21,7 @@
 
     UIView * loginForm;
 
+    UITableViewController * SLF;
     
 }
 
@@ -72,7 +73,6 @@
 
 - (void)newUser // this will collect info from button
 {
-    
     PFUser * user = [PFUser currentUser];
     user.username = nameField.text;
     user.password = pwField.text;
@@ -83,8 +83,6 @@
     
     [nameField resignFirstResponder];
     [pwField resignFirstResponder];
-
-    
 }
 
 
