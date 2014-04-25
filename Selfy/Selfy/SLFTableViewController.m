@@ -119,17 +119,10 @@
     nc.navigationBar.barTintColor = BLUE_COLOR;
     nc.navigationBar.translucent = NO;
     
-
-    
     [self.navigationController presentViewController:nc animated:YES completion:^{
 
- 
-    
-    
-    
+        
     }];
-
-
 
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "SLFNewSelfyVC.h"
+#import "SLFTableViewController.h"
 #import <Parse/Parse.h>
 
 
@@ -161,13 +162,26 @@
 
 -(void)cancelNewSelfy
 {
+    SLFTableViewController * newSLFTVC = [[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
+    UINavigationController * nc = [[UINavigationController alloc] initWithRootViewController:newSLFTVC];
+
+    nc.navigationBar.barTintColor = BLUE_COLOR;
+    nc.navigationBar.translucent = NO;
     
-    
+    [self.navigationController presentViewController:nc animated:YES completion:^{
+       
+    self.navigationController.navigationBarHidden = NO;
+        
+        
+    }];
 }
 
 -(UIStatusBarStyle)preferredStatusBarStyle
 {
+   
+  //  [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
     return UIStatusBarStyleLightContent;
     
 }

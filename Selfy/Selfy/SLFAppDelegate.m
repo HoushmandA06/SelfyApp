@@ -60,6 +60,7 @@
         navController = [[UINavigationController alloc] initWithRootViewController:[[SLFLoginVC alloc]
                                                                                     initWithNibName:nil bundle:nil]];
         navController.navigationBarHidden = YES;
+        
     } else {
         navController = [[UINavigationController alloc] initWithRootViewController:[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
     }
