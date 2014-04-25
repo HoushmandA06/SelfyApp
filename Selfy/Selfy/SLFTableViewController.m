@@ -8,6 +8,7 @@
 
 #import "SLFTableViewController.h"
 #import "SLFTableViewCell.h"
+#import "SLFNewNavigationController.h"
 #import "SLFNewSelfyVC.h"
 
 #import <Parse/Parse.h>
@@ -95,18 +96,18 @@
 {
     [super viewDidLoad];
     
-    // self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    
     UIBarButtonItem * addNewSelfyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(openNewSelfy)];
     
     self.navigationItem.rightBarButtonItem = addNewSelfyButton;
     addNewSelfyButton.tintColor = BLUE_COLOR;
+
+}
+
+- (void)viewWillAppear:(BOOL)animated //happens right after viewDidLoad
+{
     
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+
 }
 
 
@@ -114,25 +115,15 @@
 {
     SLFNewSelfyVC * newSelfyVC = [[SLFNewSelfyVC alloc] initWithNibName:nil bundle:nil];
     
-    UINavigationController * nc = [[UINavigationController alloc] initWithRootViewController:newSelfyVC];
+    SLFNewNavigationController * nc = [[SLFNewNavigationController alloc] initWithRootViewController:newSelfyVC];
     
     nc.navigationBar.barTintColor = BLUE_COLOR;
     nc.navigationBar.translucent = NO;
     
-
-    
     [self.navigationController presentViewController:nc animated:YES completion:^{
-
- 
-    
-    
-    
     }];
 
-
-
 }
-
 
 
 
@@ -186,6 +177,12 @@
     NSArray * reverseArray = [[listItems reverseObjectEnumerator] allObjects];
     return reverseArray[row];
 }
+
+
+
+
+
+
 
 
 /*

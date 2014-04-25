@@ -24,51 +24,10 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     
-    
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-    
-    newForm = [[UIView alloc] initWithFrame:self.view.frame];
-    [self.view addSubview:newForm];
-    
+        
     self.view.backgroundColor = [UIColor colorWithWhite:.95 alpha:1.0];
-        
-    newCaption = [[UITextView alloc] initWithFrame:CGRectMake(40,270,240,80)];
-    newCaption.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
-    newCaption.layer.cornerRadius = 6;
-    newCaption.delegate = self;
-    newCaption.keyboardType = UIKeyboardTypeTwitter;
-    [newCaption.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
-    [newCaption.layer setBorderWidth: 2.0];
-    [newForm addSubview:newCaption];
-        
-    //colorWithRed:0.137f green:0.682f blue:1.000f alpha:1.0f
-    //colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0
-        
-    UIButton * submitNew = [[UIButton alloc] initWithFrame:CGRectMake(40, 360, 100, 40)];
-    submitNew.backgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
-    [submitNew setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [submitNew setTitle:@"Submit" forState:UIControlStateNormal];
-    submitNew.layer.cornerRadius = 6;
-    //[newImage addTarget:self action:@selector(newSelfy) forControlEvents:UIControlEventTouchUpInside];
-    [newForm addSubview:submitNew];
-        
-    UIButton * cancelNew = [[UIButton alloc] initWithFrame:CGRectMake(180, 360, 100, 40)];
-    cancelNew.backgroundColor = [UIColor redColor];
-    [cancelNew setTitle:@"Cancel" forState:UIControlStateNormal];
-    [cancelNew setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    cancelNew.layer.cornerRadius = 6;
-    //[newImage addTarget:self action:@selector(newSelfy) forControlEvents:UIControlEventTouchUpInside];
-    [newForm addSubview:cancelNew];
-                
-    UIImageView * newImageFrame = [[UIImageView alloc] initWithFrame:CGRectMake(60,60,200,200)];
-    newImageFrame.layer.cornerRadius = 6;
-    newImageFrame.contentMode = UIViewContentModeCenter;
-    newImageFrame.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
-    newImageFrame.image = [UIImage imageNamed:@"image"];
-    [newImageFrame.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
-    [newImageFrame.layer setBorderWidth: 2.0];
-    [newForm addSubview:newImageFrame];
 
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
     [self.view addGestureRecognizer:tap];
@@ -122,6 +81,49 @@
 
 }
 
+-(void)createForm
+{
+    
+    newForm = [[UIView alloc] initWithFrame:CGRectMake(20,20,280,self.view.frame.size.height - 40)];
+    [self.view addSubview:newForm];
+    
+    newCaption = [[UITextView alloc] initWithFrame:CGRectMake(40,250,200,self.view.frame.size.height-380)];
+    newCaption.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
+    newCaption.layer.cornerRadius = 6;
+    newCaption.delegate = self;
+    newCaption.keyboardType = UIKeyboardTypeTwitter;
+    [newCaption.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
+    [newCaption.layer setBorderWidth: 2.0];
+    [newForm addSubview:newCaption];
+    
+    //colorWithRed:0.137f green:0.682f blue:1.000f alpha:1.0f
+    //colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0
+    
+    UIButton * submitNew = [[UIButton alloc] initWithFrame:CGRectMake(40, 300, 200, 40)];
+    submitNew.backgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    [submitNew setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [submitNew setTitle:@"Submit" forState:UIControlStateNormal];
+    submitNew.layer.cornerRadius = 6;
+    //[newImage addTarget:self action:@selector(newSelfy) forControlEvents:UIControlEventTouchUpInside];
+    [newForm addSubview:submitNew];
+    
+    UIImageView * newImageFrame = [[UIImageView alloc] initWithFrame:CGRectMake(40,40,200,200)];
+    newImageFrame.layer.cornerRadius = 6;
+    newImageFrame.contentMode = UIViewContentModeCenter;
+    newImageFrame.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
+    newImageFrame.image = [UIImage imageNamed:@"image"];
+    [newImageFrame.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
+    [newImageFrame.layer setBorderWidth: 2.0];
+    [newForm addSubview:newImageFrame];
+    
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
+    [self.view addGestureRecognizer:tap];
+    
+
+    
+}
+
+
 
 -(void)textViewDidBeginEditing:(UITextView *)textView  //moves new frame up as keyboard appears.
 {
@@ -159,20 +161,28 @@
     // Do any additional setup after loading the view.
 }
 
+
+
+
 -(void)cancelNewSelfy
 {
     
-    
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
     
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle
+-(void)viewWillAppear:(BOOL)animated
 {
-    return UIStatusBarStyleLightContent;
-    
+    [super viewWillAppear:animated];
+    [self createForm];
 }
 
-
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+}
 
 - (void)didReceiveMemoryWarning
 {
