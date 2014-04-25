@@ -29,12 +29,18 @@
 
         self.view.backgroundColor = [UIColor orangeColor];
         
+
+        // animate up the login form
         nameField = [[UITextField alloc] initWithFrame:CGRectMake(40,100,240,40)];
         nameField.backgroundColor = [UIColor lightGrayColor];
         nameField.layer.cornerRadius = 10;
         nameField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
         nameField.leftViewMode = UITextFieldViewModeAlways;
         nameField.placeholder = @"Enter username";
+        nameField.autocorrectionType = FALSE;
+        nameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        
+        
         
         [self.view addSubview:nameField];
         [nameField resignFirstResponder]; //this is what makes keyboard go away
