@@ -8,6 +8,8 @@
 
 #import "SLFTableViewController.h"
 #import "SLFTableViewCell.h"
+#import "SLFNewSelfyVC.h"
+
 #import <Parse/Parse.h>
 
 @interface SLFTableViewController ()
@@ -103,16 +105,36 @@
     UIBarButtonItem * addNewSelfyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(openNewSelfy)];
     
     self.navigationItem.rightBarButtonItem = addNewSelfyButton;
+    addNewSelfyButton.tintColor = BLUE_COLOR;
     
 }
 
 
 -(void)openNewSelfy
 {
+    SLFNewSelfyVC * newSelfyVC = [[SLFNewSelfyVC alloc] initWithNibName:nil bundle:nil];
+    
+    UINavigationController * nc = [[UINavigationController alloc] initWithRootViewController:newSelfyVC];
+    
+    nc.navigationBar.barTintColor = BLUE_COLOR;
+    nc.navigationBar.translucent = NO;
+    
+
+    
+    [self.navigationController presentViewController:nc animated:YES completion:^{
+
+ 
     
     
     
+    }];
+
+
+
 }
+
+
+
 
 - (void)didReceiveMemoryWarning
 {
