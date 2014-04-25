@@ -38,13 +38,13 @@
 
 -(void)moveNewFormToOriginalPosition
 {
-    newForm.frame = CGRectMake(0,0, 320, self.view.frame.size.height);
+    newForm.frame = CGRectMake(20,20, 320, self.view.frame.size.height);
 }
 
 
 -(void)moveNewFormToCaterForVirtualKeyboard
 {
-    newForm.frame = CGRectMake(0,-KB_HEIGHT, 320, self.view.frame.size.height);
+    newForm.frame = CGRectMake(20,-KB_HEIGHT, 320, self.view.frame.size.height);
 }
 
 
@@ -128,7 +128,7 @@
 -(void)textViewDidBeginEditing:(UITextView *)textView  //moves new frame up as keyboard appears.
 {
     [UIView animateWithDuration:0.2 animations:^{
-        newForm.frame = CGRectMake(0,-KB_HEIGHT, 320, self.view.frame.size.height);
+        newForm.frame = CGRectMake(20,-KB_HEIGHT, 280, self.view.frame.size.height);
         
     }];
     
