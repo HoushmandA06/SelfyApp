@@ -43,29 +43,34 @@
         
         self.tableView.backgroundColor = [UIColor clearColor];
         
-        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,60)];
-        header.backgroundColor = [UIColor lightGrayColor];
-        self.tableView.tableHeaderView = header;
         
-        UILabel * titleHeader = [[UILabel alloc] initWithFrame:CGRectMake(135,0,100,95)];
-        titleHeader.text = @"Selfy";
-        titleHeader.textColor = [UIColor blackColor];
-        titleHeader.font =[UIFont fontWithName:@"Helvetica" size:(20)];
-        [header addSubview:titleHeader];
+//////////// USING A BARBUTTONITEM AND NAVBAR, SO I DONT NEED THE BELOW:
         
-        UIButton * submit = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 30, 30)];
-        [submit setImage:[UIImage imageNamed:@"newuser.png"] forState:UIControlStateNormal];
-        submit.backgroundColor = [UIColor clearColor];
-        submit.layer.cornerRadius = 15;
-        //[submit addTarget:self action:@selector(newUser) forControlEvents:UIControlEventTouchUpInside];
-        [header addSubview:submit];
+//        UIView *header = [[UIView alloc] initWithFrame:CGRectMake(0,0,320,60)];
+//        header.backgroundColor = [UIColor lightGrayColor];
+//        self.tableView.tableHeaderView = header;
+//        
+//        UILabel * titleHeader = [[UILabel alloc] initWithFrame:CGRectMake(135,0,100,95)];
+//        titleHeader.text = @"Selfy";
+//        titleHeader.textColor = [UIColor blackColor];
+//        titleHeader.font =[UIFont fontWithName:@"Helvetica" size:(20)];
+//        [header addSubview:titleHeader];
+//        
+//        UIButton * submit = [[UIButton alloc] initWithFrame:CGRectMake(10, 30, 30, 30)];
+//        [submit setImage:[UIImage imageNamed:@"newuser.png"] forState:UIControlStateNormal];
+//        submit.backgroundColor = [UIColor clearColor];
+//        submit.layer.cornerRadius = 15;
+//        //[submit addTarget:self action:@selector(newUser) forControlEvents:UIControlEventTouchUpInside];
+//        [header addSubview:submit];
+//        
+//        UIButton * settings = [[UIButton alloc] initWithFrame:CGRectMake(280, 30, 30, 30)];
+//        [settings setImage:[UIImage imageNamed:@"gear.png"] forState:UIControlStateNormal];
+//        settings.backgroundColor = [UIColor clearColor];
+//        settings.layer.cornerRadius = 15;
+//        //[settings addTarget:self action:@selector(newUser) forControlEvents:UIControlEventTouchUpInside];
+//        [header addSubview:settings];
         
-        UIButton * settings = [[UIButton alloc] initWithFrame:CGRectMake(280, 30, 30, 30)];
-        [settings setImage:[UIImage imageNamed:@"gear.png"] forState:UIControlStateNormal];
-        settings.backgroundColor = [UIColor clearColor];
-        settings.layer.cornerRadius = 15;
-        //[settings addTarget:self action:@selector(newUser) forControlEvents:UIControlEventTouchUpInside];
-        [header addSubview:settings];
+/////////////
         
         PFObject *testObject = [PFObject objectWithClassName:@"UserSelfy"];
         testObject[@"image"] = @"";
@@ -94,7 +99,19 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    UIBarButtonItem * addNewSelfyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(openNewSelfy)];
+    
+    self.navigationItem.rightBarButtonItem = addNewSelfyButton;
+    
+}
+
+
+-(void)openNewSelfy
+{
+    
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
