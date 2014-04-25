@@ -8,6 +8,8 @@
 
 #import "SLFTableViewController.h"
 #import "SLFTableViewCell.h"
+#import "SLFNewSelfyVC.h"
+
 #import <Parse/Parse.h>
 
 @interface SLFTableViewController ()
@@ -107,9 +109,21 @@
 }
 
 
+
+
 -(void)openNewSelfy
 {
+
+    SLFNewSelfyVC * postingVC = [[SLFNewSelfyVC alloc] init];
+
+    [self.navigationController presentModalViewController:postingVC animated:YES];
+
+
+
     
+//    PostingViewController *postingVC = [[PostingViewController alloc] init];
+//    [self presentModalViewController:postingVC animated:YES];
+//    [postingVC release];
     
     
 }
