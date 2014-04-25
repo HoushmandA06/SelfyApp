@@ -85,11 +85,10 @@
     [pwField resignFirstResponder];
     
     UIActivityIndicatorView *ai = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    ai.center = self.view.center;
-    ai.color = [UIColor blueColor];
+    ai.color = [UIColor whiteColor];
     ai.frame = CGRectMake(160, 200, 75.0, 75.0);
     [ai startAnimating];
-    [self.view addSubview:ai];
+    [self.view addSubview:ai];   // can set to senter by adding it to self.view.frame
     
     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
       
@@ -98,16 +97,16 @@
           self.navigationController.navigationBarHidden = NO;
           self.navigationController.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
           
-          
-          
       } else {
         
-          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"User error" message:@"Unable to Add User" delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
-          [alertView show];
+          // NSString * errorDescription = error.userInfo[@"error"]; dont need this because i passed the code instead of sep object
           
           [ai removeFromSuperview];
           
-          // error.userInfo[@"error"]
+          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"User error" message:error.userInfo[@"error"] delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
+          [alertView show];
+          
+          
       }
           
       }];

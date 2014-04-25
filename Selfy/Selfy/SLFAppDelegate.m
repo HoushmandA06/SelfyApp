@@ -41,12 +41,13 @@
     
     // self.window.rootViewController = [[SLFNewSelfyVC alloc] initWithNibName:nil bundle:nil];
     
-    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:[[SLFLoginVC alloc]
-                                                                                         initWithNibName:nil bundle:nil]];
+//    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:[[SLFLoginVC alloc]
+//                                                                                         initWithNibName:nil bundle:nil]];
     
     // use to work on new selfy
-//    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:[[SLFNewSelfyVC alloc] initWithNibName:nil bundle:nil]];
-    
+    UINavigationController * navController = [[UINavigationController alloc] initWithRootViewController:[[SLFNewSelfyVC alloc] initWithNibName:nil bundle:nil]];
+    navController.navigationBarHidden = YES;
+
     
     PFUser * user = [PFUser currentUser];
     NSString * username = user.username;

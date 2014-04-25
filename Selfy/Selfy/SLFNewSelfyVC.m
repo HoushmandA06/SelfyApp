@@ -7,6 +7,8 @@
 //
 
 #import "SLFNewSelfyVC.h"
+#import <Parse/Parse.h>
+
 
 @interface SLFNewSelfyVC ()
 
@@ -108,11 +110,16 @@
 
 -(void)newSelfy
 {
-    //PFObject "UserSelfy"
-    //put a png file inside the app
-    //PFFile used to save/load
-    //
+   
+    UIImage * image = [UIImage imageNamed:@"greenmonster"]; //local file name
+    NSData * imageData = UIImagePNGRepresentation(image);
+    PFFile * imageFile = [PFFile fileWithName:@"greenmonster.png" data:imageData]; //file name on Parse, you set it
     
+    PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
+    newSelfy[@"caption"] = newCaption.text;
+    newSelfy[@"image"] = imageFile;  //creates a new row with column "image" and data "imageFile"
+    [newSelfy saveInBackground];
+
 }
 
 
