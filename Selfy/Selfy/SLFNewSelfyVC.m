@@ -18,6 +18,9 @@
 {
     UITextView * newCaption;
     
+    UIImageView * newImageFrame;
+    
+    
     UIView *newForm;
 }
 
@@ -70,9 +73,13 @@
 -(void)newSelfy
 {
    
-    UIImage * image = [UIImage imageNamed:@"greenmonster"]; //local file name
+    
+    UIImage * image = newImageFrame.image;
+    
+    //UIImage * image = [UIImage imageNamed:@"greenmonster"]; //local file name
+    
     NSData * imageData = UIImagePNGRepresentation(image);
-    PFFile * imageFile = [PFFile fileWithName:@"greenmonster.png" data:imageData]; //file name on Parse, you set it
+    PFFile * imageFile = [PFFile fileWithName:@"boss.png" data:imageData]; //file name on Parse, you set it... HOW TO AUTOMATE TO GRAB NAME FROM UIIMAGEVIEW?
     
     PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
     newSelfy[@"caption"] = newCaption.text;
@@ -107,19 +114,18 @@
     //[newImage addTarget:self action:@selector(newSelfy) forControlEvents:UIControlEventTouchUpInside];
     [newForm addSubview:submitNew];
     
-    UIImageView * newImageFrame = [[UIImageView alloc] initWithFrame:CGRectMake(40,40,200,200)];
+    newImageFrame = [[UIImageView alloc] initWithFrame:CGRectMake(40,40,200,200)];
     newImageFrame.layer.cornerRadius = 6;
     newImageFrame.contentMode = UIViewContentModeCenter;
     newImageFrame.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
-    newImageFrame.image = [UIImage imageNamed:@"image"];
+    newImageFrame.image = [UIImage imageNamed:@"boss"];
+    newImageFrame.layer.masksToBounds = YES;
     [newImageFrame.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
     [newImageFrame.layer setBorderWidth: 2.0];
     [newForm addSubview:newImageFrame];
     
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
     [self.view addGestureRecognizer:tap];
-    
-
     
 }
 

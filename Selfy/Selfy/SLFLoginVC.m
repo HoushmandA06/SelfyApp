@@ -111,8 +111,7 @@
           
           UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"User error" message:error.userInfo[@"error"] delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
           [alertView show];
-          
-          
+
       }
           
       }];
