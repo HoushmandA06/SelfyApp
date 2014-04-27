@@ -7,6 +7,9 @@
 //
 
 #import "SLFNewSelfyVC.h"
+#import "SLFTableViewController.h"
+#import "SLFNewNavigationController.h"
+
 #import <Parse/Parse.h>
 
 @interface SLFNewSelfyVC ()
@@ -96,16 +99,50 @@
     [UIView animateWithDuration:0.2 animations:^{
         [self moveNewFormToOriginalPosition];
     }];
+    
+    // to get back to TVC
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
 
+    
+    }];
+    
+    
+//    PFFile *userImageFile = anotherPhoto[@"imageFile"];
+//    [userImageFile getDataInBackgroundWithBlock:^(NSData *imageData, NSError *error) {
+//        if (!error) {
+//            UIImage *image = [UIImage imageWithData:imageData];
+//        }
+//    }];
+    
+    
 }
+
+//-(void)openNewSelfy
+//{
+//    SLFNewSelfyVC * newSelfyVC = [[SLFNewSelfyVC alloc] initWithNibName:nil bundle:nil];
+//    
+//    SLFNewNavigationController * nc = [[SLFNewNavigationController alloc] initWithRootViewController:newSelfyVC];
+//    
+//    nc.navigationBar.barTintColor = BLUE_COLOR;
+//    nc.navigationBar.translucent = NO;
+//    
+//    [self.navigationController presentViewController:nc animated:YES completion:^{
+//    }];
+//    
+//}
+
+-(void)newTVC
+{
+    
+    
+}
+
 
 - (BOOL)textViewShouldReturn:(UITextView *)textView   //now any textField will allow resign keyboard
 {
     [textView resignFirstResponder];
     return YES;
 }
-
-
 
 
 -(void)tapScreen // moves frame back down, removes keyboard
@@ -139,7 +176,6 @@
 }
 
 
-
 -(void)textViewDidBeginEditing:(UITextView *)textView  //moves new frame up as keyboard appears.
 {
     [UIView animateWithDuration:0.2 animations:^{
@@ -167,9 +203,12 @@
 
 -(void)cancelNewSelfy
 {
+    // how is SLFNewSelfyVC able to use navigationController as property on self?
+    
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
     
     }];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
