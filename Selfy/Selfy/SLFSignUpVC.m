@@ -1,0 +1,145 @@
+//
+//  SLFSignUpVC.m
+//  Selfy
+//
+//  Created by Ali Houshmand on 4/28/14.
+//  Copyright (c) 2014 Ali Houshmand. All rights reserved.
+//
+
+#import "SLFSignUpVC.h"
+
+@interface SLFSignUpVC ()
+
+@end
+
+@implementation SLFSignUpVC
+{
+    UITextField * nameField;
+    UITextField * pwField;
+    UITextField * displayName;
+    UITextField * email;
+    
+    UIView *newForm;
+    
+}
+
+
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+
+-(void)createForm
+{
+    
+    newForm = [[UIView alloc] initWithFrame:CGRectMake(20,20,280,self.view.frame.size.height - 40)];
+    [self.view addSubview:newForm];
+    
+    nameField = [[UITextField alloc] initWithFrame:CGRectMake(20,100,240,40)];
+    nameField.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+    nameField.layer.cornerRadius = 10;
+    nameField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
+    nameField.leftViewMode = UITextFieldViewModeAlways;
+    nameField.placeholder = @"Enter username";
+    nameField.autocorrectionType = FALSE;
+    nameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    
+    [newForm addSubview:nameField];
+    [nameField resignFirstResponder]; //this is what makes keyboard go away
+    nameField.delegate = self;
+    
+    
+    pwField = [[UITextField alloc] initWithFrame:CGRectMake(20,150,240,40)];
+    pwField.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+    pwField.layer.cornerRadius = 10;
+    pwField.secureTextEntry = YES;
+    pwField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
+    pwField.leftViewMode = UITextFieldViewModeAlways;
+    pwField.placeholder = @"Enter password";
+    
+    [newForm addSubview:pwField];
+    [pwField resignFirstResponder];
+    pwField.delegate = self;
+    
+    
+    displayName = [[UITextField alloc] initWithFrame:CGRectMake(20,200,240,40)];
+    displayName.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+    displayName.layer.cornerRadius = 10;
+    displayName.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
+    displayName.leftViewMode = UITextFieldViewModeAlways;
+    displayName.placeholder = @"Enter username";
+    displayName.autocorrectionType = FALSE;
+    displayName.autocapitalizationType = UITextAutocapitalizationTypeNone;
+
+    [newForm addSubview:displayName];
+    [displayName resignFirstResponder]; //this is what makes keyboard go away
+    displayName.delegate = self;
+    
+    email = [[UITextField alloc] initWithFrame:CGRectMake(20,250,240,40)];
+    email.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+    email.layer.cornerRadius = 10;
+    email.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
+    email.leftViewMode = UITextFieldViewModeAlways;
+    email.placeholder = @"Enter username";
+    email.autocorrectionType = FALSE;
+    email.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    
+    [newForm addSubview:email];
+    [email resignFirstResponder]; //this is what makes keyboard go away
+    email.delegate = self;
+    
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    
+    UIBarButtonItem * cancelSignUp = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelSignUp)];
+    
+    cancelSignUp.tintColor = [UIColor whiteColor];
+    self.navigationItem.rightBarButtonItem = cancelSignUp;
+    
+    [self setNeedsStatusBarAppearanceUpdate];
+    
+}
+
+-(void)cancelSignUp
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self createForm];
+}
+
+
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end

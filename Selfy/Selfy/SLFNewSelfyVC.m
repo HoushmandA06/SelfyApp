@@ -100,7 +100,7 @@
     newImageFrame.layer.cornerRadius = 6;
     newImageFrame.layer.masksToBounds = YES;
     newImageFrame.contentMode = UIViewContentModeScaleToFill;
-   // newImageFrame.contentMode = UIViewContentModeCenter;
+    // newImageFrame.contentMode = UIViewContentModeCenter;
     newImageFrame.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
     newImageFrame.image = [UIImage imageNamed:@"boss"];
     [newImageFrame.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
@@ -180,10 +180,6 @@
     [self createForm];
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-}
 
 - (void)didReceiveMemoryWarning
 {

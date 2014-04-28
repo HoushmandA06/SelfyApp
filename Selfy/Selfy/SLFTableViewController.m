@@ -72,9 +72,17 @@
     [super viewDidLoad];
     
     UIBarButtonItem * addNewSelfyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(openNewSelfy)];
-    
     self.navigationItem.rightBarButtonItem = addNewSelfyButton;
     addNewSelfyButton.tintColor = BLUE_COLOR;
+    
+    UIBarButtonItem * settingsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(settingsButtonAction)];
+    self.navigationItem.leftBarButtonItem = settingsButton;
+    settingsButton.tintColor = BLUE_COLOR;
+    
+}
+
+-(void)settingsButtonAction
+{
 
 }
 

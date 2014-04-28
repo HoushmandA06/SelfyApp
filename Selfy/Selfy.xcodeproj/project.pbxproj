@@ -13,6 +13,8 @@
 		0FA7FF1C190A9C2200CC0A8C /* greenmonster.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA7FF1B190A9C2200CC0A8C /* greenmonster.png */; };
 		0FA7FF1F190AEB7A00CC0A8C /* SLFNewNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA7FF1E190AEB7A00CC0A8C /* SLFNewNavigationController.m */; };
 		0FA97A65190E8FF000C03C34 /* boss.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA97A64190E8FF000C03C34 /* boss.png */; };
+		0FA97A67190EE65200C03C34 /* currentuser.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA97A66190EE65200C03C34 /* currentuser.png */; };
+		0FA97A6D190EEDC700C03C34 /* SLFSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA97A6C190EEDC700C03C34 /* SLFSignUpVC.m */; };
 		0FABCFBD190588E400B39854 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFBC190588E400B39854 /* Foundation.framework */; };
 		0FABCFBF190588E400B39854 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFBE190588E400B39854 /* CoreGraphics.framework */; };
 		0FABCFC1190588E400B39854 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFC0190588E400B39854 /* UIKit.framework */; };
@@ -61,6 +63,9 @@
 		0FA7FF1D190AEB7A00CC0A8C /* SLFNewNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFNewNavigationController.h; sourceTree = "<group>"; };
 		0FA7FF1E190AEB7A00CC0A8C /* SLFNewNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFNewNavigationController.m; sourceTree = "<group>"; };
 		0FA97A64190E8FF000C03C34 /* boss.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = boss.png; path = ../../../../../Downloads/boss.png; sourceTree = "<group>"; };
+		0FA97A66190EE65200C03C34 /* currentuser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = currentuser.png; path = ../../../../../Downloads/currentuser.png; sourceTree = "<group>"; };
+		0FA97A6B190EEDC700C03C34 /* SLFSignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFSignUpVC.h; sourceTree = "<group>"; };
+		0FA97A6C190EEDC700C03C34 /* SLFSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFSignUpVC.m; sourceTree = "<group>"; };
 		0FABCFB9190588E400B39854 /* Selfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Selfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FABCFBC190588E400B39854 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0FABCFBE190588E400B39854 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -134,6 +139,8 @@
 			children = (
 				0FA7FEC01906D2F400CC0A8C /* SLFLoginVC.h */,
 				0FA7FEC11906D2F400CC0A8C /* SLFLoginVC.m */,
+				0FA97A6B190EEDC700C03C34 /* SLFSignUpVC.h */,
+				0FA97A6C190EEDC700C03C34 /* SLFSignUpVC.m */,
 				0FA7FEC31906D31A00CC0A8C /* SLFNewSelfyVC.h */,
 				0FA7FEC41906D31A00CC0A8C /* SLFNewSelfyVC.m */,
 			);
@@ -203,6 +210,7 @@
 			children = (
 				0FABCFC4190588E400B39854 /* Selfy-Info.plist */,
 				0FABCFC5190588E400B39854 /* InfoPlist.strings */,
+				0FA97A66190EE65200C03C34 /* currentuser.png */,
 				0FABCFC8190588E400B39854 /* main.m */,
 				0FABCFCA190588E400B39854 /* Selfy-Prefix.pch */,
 				0FA7FF1B190A9C2200CC0A8C /* greenmonster.png */,
@@ -312,6 +320,7 @@
 				0FABCFCF190588E400B39854 /* Images.xcassets in Resources */,
 				0FABCFF41905AC9000B39854 /* gear.png in Resources */,
 				0FABCFF31905AC9000B39854 /* image.png in Resources */,
+				0FA97A67190EE65200C03C34 /* currentuser.png in Resources */,
 				0FA7FF1C190A9C2200CC0A8C /* greenmonster.png in Resources */,
 				0FA7FEBE1906D1E600CC0A8C /* newuser.png in Resources */,
 				0FA97A65190E8FF000C03C34 /* boss.png in Resources */,
@@ -337,6 +346,7 @@
 				0FA7FF1F190AEB7A00CC0A8C /* SLFNewNavigationController.m in Sources */,
 				0FABCFCD190588E400B39854 /* SLFAppDelegate.m in Sources */,
 				0FABCFF019059A6000B39854 /* SLFTableViewCell.m in Sources */,
+				0FA97A6D190EEDC700C03C34 /* SLFSignUpVC.m in Sources */,
 				0FABCFC9190588E400B39854 /* main.m in Sources */,
 				0FABCFED1905892C00B39854 /* SLFTableViewController.m in Sources */,
 				0FA7FEC51906D31A00CC0A8C /* SLFNewSelfyVC.m in Sources */,

@@ -7,6 +7,8 @@
 //
 
 #import "SLFTableViewController.h"
+#import "SLFNewNavigationController.h"
+#import "SLFSignUpVC.h"
 #import "SLFLoginVC.h"
 #import <Parse/Parse.h>
 
@@ -39,10 +41,8 @@
         nameField.placeholder = @"Enter username";
         nameField.autocorrectionType = FALSE;
         nameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-        
-        
-        
         [self.view addSubview:nameField];
+        
         [nameField resignFirstResponder]; //this is what makes keyboard go away
         nameField.delegate = self;
         
@@ -58,25 +58,52 @@
         [pwField resignFirstResponder];
         pwField.delegate = self;
         
-        //will need to resign first reponder for keyboard to go away, DO THIS LATER
-        
-        UIButton * submit = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/2)-40, 210, 80, 80)];
-        [submit setImage:[UIImage imageNamed:@"newuser.png"] forState:UIControlStateNormal];
-        submit.backgroundColor = [UIColor clearColor];
-        submit.layer.cornerRadius = 40;
-        [submit addTarget:self action:@selector(newUser) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:submit];
+        UIButton * current = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/2)-40, 210, 80, 80)];
+        [current setImage:[UIImage imageNamed:@"currentuser.png"] forState:UIControlStateNormal];
+        current.backgroundColor = [UIColor clearColor];
+        current.layer.cornerRadius = 40;
+        [current addTarget:self action:@selector(newUser) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:current];
   
+        UILabel * newUserQuery = [[UILabel alloc] initWithFrame:CGRectMake(50, 310, 240, 20)];
+        newUserQuery.text = @"Don't have an account? Click below:";
+        newUserQuery.font = [UIFont fontWithName:@"Helvetica" size:12];
+        newUserQuery.textColor = [UIColor whiteColor];
+        [self.view addSubview:newUserQuery];
+        
+        UIButton * newUser = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/2)-40, 340, 80, 80)];
+        [newUser setImage:[UIImage imageNamed:@"newuser.png"] forState:UIControlStateNormal];
+        newUser.backgroundColor = [UIColor clearColor];
+        newUser.layer.cornerRadius = 40;
+        [newUser addTarget:self action:@selector(newUserSignUp) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:newUser];
+        
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
         [self.view addGestureRecognizer:tap];
-
-    
-        
     }
     return self;
 }
 
-- (void)newUser // this will collect info from button
+
+-(void)newUserSignUp
+{
+    
+    SLFSignUpVC * newUserSignUp = [[SLFSignUpVC alloc] initWithNibName:nil bundle:nil];
+    
+    SLFNewNavigationController * nc = [[SLFNewNavigationController alloc] initWithRootViewController:newUserSignUp];
+
+    nc.navigationBar.barTintColor = BLUE_COLOR;
+    nc.navigationBar.translucent = NO;
+    
+    [self.navigationController presentViewController:nc animated:YES completion:^{
+    }];
+    
+    // will switch views
+    
+}
+
+
+- (void)newUser // this will collect info from button -- THIS WILL NEED TO BE EXISTING USER SIGN IN
 {
     
     PFUser * user = [PFUser currentUser];
@@ -111,7 +138,6 @@
           
           UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"User error" message:error.userInfo[@"error"] delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
           [alertView show];
-          
           
       }
           
