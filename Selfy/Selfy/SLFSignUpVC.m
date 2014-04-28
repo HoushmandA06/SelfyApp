@@ -18,6 +18,7 @@
     UITextField * pwField;
     UITextField * displayName;
     UITextField * email;
+    UIImageView * avatarFrame;
     
     UIView *newForm;
     
@@ -41,7 +42,7 @@
     newForm = [[UIView alloc] initWithFrame:CGRectMake(20,20,280,self.view.frame.size.height - 40)];
     [self.view addSubview:newForm];
     
-    nameField = [[UITextField alloc] initWithFrame:CGRectMake(20,100,240,40)];
+    nameField = [[UITextField alloc] initWithFrame:CGRectMake(20,50,240,40)];
     nameField.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
     nameField.layer.cornerRadius = 10;
     nameField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
@@ -55,7 +56,7 @@
     nameField.delegate = self;
     
     
-    pwField = [[UITextField alloc] initWithFrame:CGRectMake(20,150,240,40)];
+    pwField = [[UITextField alloc] initWithFrame:CGRectMake(20,100,240,40)];
     pwField.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
     pwField.layer.cornerRadius = 10;
     pwField.secureTextEntry = YES;
@@ -68,12 +69,12 @@
     pwField.delegate = self;
     
     
-    displayName = [[UITextField alloc] initWithFrame:CGRectMake(20,200,240,40)];
+    displayName = [[UITextField alloc] initWithFrame:CGRectMake(20,150,240,40)];
     displayName.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
     displayName.layer.cornerRadius = 10;
     displayName.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
     displayName.leftViewMode = UITextFieldViewModeAlways;
-    displayName.placeholder = @"Enter username";
+    displayName.placeholder = @"Enter display name";
     displayName.autocorrectionType = FALSE;
     displayName.autocapitalizationType = UITextAutocapitalizationTypeNone;
 
@@ -81,18 +82,38 @@
     [displayName resignFirstResponder]; //this is what makes keyboard go away
     displayName.delegate = self;
     
-    email = [[UITextField alloc] initWithFrame:CGRectMake(20,250,240,40)];
+    email = [[UITextField alloc] initWithFrame:CGRectMake(20,200,240,40)];
     email.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
     email.layer.cornerRadius = 10;
     email.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
     email.leftViewMode = UITextFieldViewModeAlways;
-    email.placeholder = @"Enter username";
+    email.placeholder = @"Enter email address";
     email.autocorrectionType = FALSE;
     email.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
     [newForm addSubview:email];
     [email resignFirstResponder]; //this is what makes keyboard go away
     email.delegate = self;
+    
+    avatarFrame = [[UIImageView alloc] initWithFrame:CGRectMake(115,250,50,50)]; // need to make it listen to touches
+    avatarFrame.layer.cornerRadius = 25;
+    avatarFrame.layer.masksToBounds = YES;
+    avatarFrame.contentMode = UIViewContentModeScaleToFill;
+    avatarFrame.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
+    avatarFrame.image = [UIImage imageNamed:@"greenmonster"];
+    [avatarFrame.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
+    [avatarFrame.layer setBorderWidth: 2.0];
+    [newForm addSubview:avatarFrame];
+    
+    UIButton * submitSignUp = [[UIButton alloc] initWithFrame:CGRectMake(20, 340, 240, 40)];
+    submitSignUp.backgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
+    [submitSignUp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [submitSignUp setTitle:@"Submit" forState:UIControlStateNormal];
+    submitSignUp.layer.cornerRadius = 6;
+    [submitSignUp addTarget:self action:@selector(submitSignUp) forControlEvents:UIControlEventTouchUpInside];
+    [newForm addSubview:submitSignUp];
+    
+    
     
 }
 
@@ -101,11 +122,18 @@
     [super viewDidLoad];
     
     UIBarButtonItem * cancelSignUp = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelSignUp)];
-    
+
     cancelSignUp.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = cancelSignUp;
-    
     [self setNeedsStatusBarAppearanceUpdate];
+}
+
+
+-(void)submitSignUp
+{
+
+    
+    
     
 }
 
