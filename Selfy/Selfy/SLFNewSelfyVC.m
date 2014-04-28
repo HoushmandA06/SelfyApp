@@ -119,12 +119,12 @@
     // connect current user to newSelfy as parent (look at parse documentation relational queries)
     
     NSData * imageData = UIImagePNGRepresentation(newImageFrame.image);
-    
     PFFile * imageFile = [PFFile fileWithName:@"image.png" data:imageData]; //file name on Parse, you set it
-    
     PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
+    
     newSelfy[@"caption"] = newCaption.text;
     newSelfy[@"image"] = imageFile;  //creates a new row with column "image" and data "imageFile"
+    newSelfy[@"parent"] = [PFUser currentUser];
     
     [newSelfy saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         NSLog(@"%u", succeeded);
@@ -132,15 +132,12 @@
     }];
     
 
-    //// remove keyboard, not really necessary since you will be dismissing the view post completion
-    
+///// remove keyboard, not really necessary since you will be dismissing the view post completion
 //    [newCaption resignFirstResponder];
-//    
-//    [UIView animateWithDuration:0.2 animations:^{
+//    [UIView animateWithDuration:0.2 animations:^{  //this moves form down
 //        [self moveNewFormToOriginalPosition];
 //    }];
-    
-    
+
 }
 
 -(void)textViewDidBeginEditing:(UITextView *)textView  //moves new frame up as keyboard appears.
