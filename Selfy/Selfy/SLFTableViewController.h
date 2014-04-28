@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
-@interface SLFTableViewController : UITableViewController
+@interface SLFTableViewController : PFQueryTableViewController
 
 @end

@@ -102,7 +102,7 @@
     
     // to get back to TVC
     [self.navigationController dismissViewControllerAnimated:YES completion:^{
-
+        
     
     }];
     
@@ -113,8 +113,7 @@
 //            UIImage *image = [UIImage imageWithData:imageData];
 //        }
 //    }];
-    
-    
+
 }
 
 //-(void)openNewSelfy

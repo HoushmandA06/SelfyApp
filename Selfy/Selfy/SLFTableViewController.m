@@ -100,6 +100,9 @@
     
     self.navigationItem.rightBarButtonItem = addNewSelfyButton;
     addNewSelfyButton.tintColor = BLUE_COLOR;
+    
+    // self.parseClassName = @"UserSelfy";
+    
 
 }
 
