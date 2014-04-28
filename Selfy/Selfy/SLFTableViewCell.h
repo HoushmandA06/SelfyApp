@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 
 @interface SLFTableViewCell : UITableViewCell
 
-@property (nonatomic) NSDictionary * profileInfo;
+@property (nonatomic) PFObject * profileInfo;
 
 
 @end

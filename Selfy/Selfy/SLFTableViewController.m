@@ -19,10 +19,7 @@
 
 @implementation SLFTableViewController
 {
-    
-    NSMutableArray * listItems;
-    
-    
+    NSArray * listItems;
 }
 
 
@@ -30,20 +27,8 @@
 {
     self = [super initWithStyle:UITableViewStylePlain];
     if (self) {
-        // Custom initialization
         
-        listItems = [@[
-                       @{
-                           @"image":@"https://fbcdn-sphotos-b-a.akamaihd.net/hphotos-ak-frc3/t1.0-9/1925270_10152455776049101_2087603519931381835_n.jpg",
-                           @"caption":@"caption",
-                           @"avatar":@"https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc3/t1.0-1/p160x160/1912422_10203278436345152_1248645625_n.jpg",
-                           @"userid":@"ali",
-                           @"selfy_id" : @""
-                           }
-                       ] mutableCopy];
-        
-        // [self loadListItems]; * will use this when we put in save/load methods
-        
+        [self refreshSelfies];
         self.tableView.backgroundColor = [UIColor clearColor];
         
         
@@ -75,16 +60,6 @@
         
 /////////////
         
-        PFObject *testObject = [PFObject objectWithClassName:@"UserSelfy"];
-        testObject[@"image"] = @"";
-        testObject[@"caption"] = @"";
-        [testObject saveInBackground];
-        
-        PFUser * user = [PFUser currentUser];
-        user.username = @"ali houshmand";
-        user.password = @"password";
-        [user saveInBackground];
-        
         self.tableView.rowHeight = self.tableView.frame.size.width+60;
         
         
@@ -103,10 +78,13 @@
 
 }
 
+
+
 - (void)viewWillAppear:(BOOL)animated //happens right after viewDidLoad
 {
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+    [self refreshSelfies];
 
 }
 
@@ -144,11 +122,29 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+
     // Return the number of rows in the section.
     return [listItems count];
-    
 }
 
+-(void)refreshSelfies
+{
+    PFQuery * query = [PFQuery queryWithClassName:@"UserSelfy"];
+    
+    // change order by created date, newest first.
+    
+    // after user connected to selfy : filter only your user's selfies (requires parent in SLFNewSelfyVC.m)
+    
+    
+    
+[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+   
+    listItems = objects;
+    
+    [self.tableView reloadData];
+}];
+ 
+}
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -161,9 +157,11 @@
         cell = [[SLFTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"]; //creates new cell if dequeued cell not available
     }
     
-    cell.profileInfo = [self getListItem:indexPath.row]; // will require setter method in tableviewcell
+//    cell.profileInfo = [self getListItem:indexPath.row]; // will require setter method in tableviewcell
     // cell.profileInfo = listItems[indexPath.row]; same as above, but above uses method for reverse row
 
+    cell.profileInfo = listItems[indexPath.row];
+    
     self.tableView.separatorInset = UIEdgeInsetsZero;
     
     // Configure the cell...
@@ -172,11 +170,11 @@
 }
 
 
-- (NSDictionary *)getListItem:(NSInteger)row
-{
-    NSArray * reverseArray = [[listItems reverseObjectEnumerator] allObjects];
-    return reverseArray[row];
-}
+//- (NSDictionary *)getListItem:(NSInteger)row   // this wont work now that we are using PFObject for profile info
+//{
+//    NSArray * reverseArray = [[listItems reverseObjectEnumerator] allObjects];
+//    return reverseArray[row];
+//}
 
 
 

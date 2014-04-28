@@ -50,26 +50,46 @@
     return self;
 }
 
-- (void)setProfileInfo:(NSDictionary *)profileInfo; // THIS IS A SETTER
+- (void)setProfileInfo:(PFObject *)profileInfo; // THIS IS A SETTER
 {
-    NSString *imageUrlString = profileInfo[@"image"];
-    //  NSURL *imageURL = [[NSURL alloc] URLWithString:profileInfo[@"image"]];  this way combines line 55 above and line 57 below
-    NSURL *imageUrl = [[NSURL alloc] initWithString:imageUrlString];
-    NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
-    UIImage *image = [UIImage imageWithData:imageData];
+    
+    
+    
+    
+//    NSString *imageUrlString = profileInfo[@"image"];
+//    //  NSURL *imageURL = [[NSURL alloc] URLWithString:profileInfo[@"image"]];  this way combines line 55 above and line 57 below
+//    NSURL *imageUrl = [[NSURL alloc] initWithString:imageUrlString];
+//    NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
+//    UIImage *image = [UIImage imageWithData:imageData];
+
+    
+    PFFile * imageFile = [profileInfo objectForKey:@"image"];
+    [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+    
+    UIImage * image = [UIImage imageWithData:data];
     selfyView.image = image;
+        
+    } progressBlock:^(int percentDone) {
+      
+        // do something 
+        
+    }];
+    
     selfyView.contentMode = UIViewContentModeScaleAspectFit;
     
-    NSString *avatarUrlString = profileInfo[@"avatar"];
-    NSURL *avatarUrl = [[NSURL alloc] initWithString:avatarUrlString];
-    NSData *avatarData = [NSData dataWithContentsOfURL:avatarUrl];
-    UIImage *avatarImage = [UIImage imageWithData:avatarData];
-    selfyAvatar.image = avatarImage;
-    selfyAvatar.contentMode = UIViewContentModeScaleAspectFit;
+//    NSString *avatarUrlString = profileInfo[@"avatar"];
+//    NSURL *avatarUrl = [[NSURL alloc] initWithString:avatarUrlString];
+//    NSData *avatarData = [NSData dataWithContentsOfURL:avatarUrl];
+//    UIImage *avatarImage = [UIImage imageWithData:avatarData];
+//    selfyAvatar.image = avatarImage;
+//    selfyAvatar.contentMode = UIViewContentModeScaleAspectFit;
 
-    selfyCaption.text = profileInfo[@"caption"];
+    // selfyCaption.text = profileInfo[@"caption"];  not using this anymore, now getting it from parse
     
-    selfyUserId.text = profileInfo[@"userid"];
+    selfyCaption.text = [profileInfo objectForKey:@"caption"];
+    
+    
+//    selfyUserId.text = profileInfo[@"userid"];
     
     _profileInfo = profileInfo;
     

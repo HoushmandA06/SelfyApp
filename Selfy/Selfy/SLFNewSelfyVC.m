@@ -109,15 +109,14 @@
     
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
     [self.view addGestureRecognizer:tap];
-    
 
-    
 }
 
 -(void)newSelfy
 {
     
-    //     UIImage * image = [UIImage imageNamed:@"boss"]; // dont need, declared globally newImageFrame
+
+    // connect current user to newSelfy as parent (look at parse documentation relational queries)
     
     NSData * imageData = UIImagePNGRepresentation(newImageFrame.image);
     
@@ -126,9 +125,20 @@
     PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
     newSelfy[@"caption"] = newCaption.text;
     newSelfy[@"image"] = imageFile;  //creates a new row with column "image" and data "imageFile"
-    [newSelfy saveInBackground];
     
+    [newSelfy saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        NSLog(@"%u", succeeded);
+        [self cancelNewSelfy];
+    }];
     
+
+    //// remove keyboard, not really necessary since you will be dismissing the view post completion
+    
+//    [newCaption resignFirstResponder];
+//    
+//    [UIView animateWithDuration:0.2 animations:^{
+//        [self moveNewFormToOriginalPosition];
+//    }];
     
     
 }
@@ -141,18 +151,6 @@
     }];
     
 }
-
-
-//- (BOOL) textView: (UITextView*) textView shouldChangeTextInRange: (NSRange) range   // had this to remove UITextView, are using dif way
-//  replacementText: (NSString*) text
-//{
-//    if ([text isEqualToString:@"\n"]) {
-//        [textView resignFirstResponder];
-//        return NO;
-//    }
-//    return YES;
-//}
-
 
 
 - (void)viewDidLoad
@@ -168,8 +166,6 @@
     
     // Do any additional setup after loading the view.
 }
-
-
 
 
 -(void)cancelNewSelfy
@@ -197,6 +193,17 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+//- (BOOL) textView: (UITextView*) textView shouldChangeTextInRange: (NSRange) range   // had this to remove UITextView, are using dif way
+//  replacementText: (NSString*) text
+//{
+//    if ([text isEqualToString:@"\n"]) {
+//        [textView resignFirstResponder];
+//        return NO;
+//    }
+//    return YES;
+//}
 
 
 
