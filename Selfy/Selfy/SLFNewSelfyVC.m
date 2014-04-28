@@ -19,6 +19,9 @@
     UITextView * newCaption;
     
     UIView *newForm;
+    
+    UIImageView * newImageFrame;
+    
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -67,20 +70,6 @@
     }];
 }
 
--(void)newSelfy
-{
-   
-    UIImage * image = [UIImage imageNamed:@"greenmonster"]; //local file name
-    NSData * imageData = UIImagePNGRepresentation(image);
-    PFFile * imageFile = [PFFile fileWithName:@"greenmonster.png" data:imageData]; //file name on Parse, you set it
-    
-    PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
-    newSelfy[@"caption"] = newCaption.text;
-    newSelfy[@"image"] = imageFile;  //creates a new row with column "image" and data "imageFile"
-    [newSelfy saveInBackground];
-
-}
-
 -(void)createForm
 {
     
@@ -104,14 +93,16 @@
     [submitNew setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [submitNew setTitle:@"Submit" forState:UIControlStateNormal];
     submitNew.layer.cornerRadius = 6;
-    //[newImage addTarget:self action:@selector(newSelfy) forControlEvents:UIControlEventTouchUpInside];
+    [submitNew addTarget:self action:@selector(newSelfy) forControlEvents:UIControlEventTouchUpInside];
     [newForm addSubview:submitNew];
     
-    UIImageView * newImageFrame = [[UIImageView alloc] initWithFrame:CGRectMake(40,40,200,200)];
+    newImageFrame = [[UIImageView alloc] initWithFrame:CGRectMake(40,40,200,200)];
     newImageFrame.layer.cornerRadius = 6;
-    newImageFrame.contentMode = UIViewContentModeCenter;
+    newImageFrame.layer.masksToBounds = YES;
+    newImageFrame.contentMode = UIViewContentModeScaleToFill;
+   // newImageFrame.contentMode = UIViewContentModeCenter;
     newImageFrame.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
-    newImageFrame.image = [UIImage imageNamed:@"image"];
+    newImageFrame.image = [UIImage imageNamed:@"boss"];
     [newImageFrame.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
     [newImageFrame.layer setBorderWidth: 2.0];
     [newForm addSubview:newImageFrame];
@@ -123,7 +114,24 @@
     
 }
 
-
+-(void)newSelfy
+{
+    
+    //     UIImage * image = [UIImage imageNamed:@"boss"]; // dont need, declared globally newImageFrame
+    
+    NSData * imageData = UIImagePNGRepresentation(newImageFrame.image);
+    
+    PFFile * imageFile = [PFFile fileWithName:@"image.png" data:imageData]; //file name on Parse, you set it
+    
+    PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
+    newSelfy[@"caption"] = newCaption.text;
+    newSelfy[@"image"] = imageFile;  //creates a new row with column "image" and data "imageFile"
+    [newSelfy saveInBackground];
+    
+    
+    
+    
+}
 
 -(void)textViewDidBeginEditing:(UITextView *)textView  //moves new frame up as keyboard appears.
 {
