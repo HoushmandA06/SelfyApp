@@ -39,9 +39,6 @@
         nameField.placeholder = @"Enter username";
         nameField.autocorrectionType = FALSE;
         nameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
-        
-        
-        
         [self.view addSubview:nameField];
         [nameField resignFirstResponder]; //this is what makes keyboard go away
         nameField.delegate = self;
@@ -53,12 +50,9 @@
         pwField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
         pwField.leftViewMode = UITextFieldViewModeAlways;
         pwField.placeholder = @"Enter password";
-        
         [self.view addSubview:pwField];
         [pwField resignFirstResponder];
         pwField.delegate = self;
-        
-        //will need to resign first reponder for keyboard to go away, DO THIS LATER
         
         UIButton * submit = [[UIButton alloc] initWithFrame:CGRectMake((SCREEN_WIDTH/2)-40, 210, 80, 80)];
         [submit setImage:[UIImage imageNamed:@"newuser.png"] forState:UIControlStateNormal];
@@ -69,8 +63,6 @@
   
         UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
         [self.view addGestureRecognizer:tap];
-
-    
         
     }
     return self;
@@ -82,6 +74,7 @@
     PFUser * user = [PFUser currentUser];
     user.username = nameField.text;
     user.password = pwField.text;
+    
     
     nameField.text = nil;
     pwField.text = nil;

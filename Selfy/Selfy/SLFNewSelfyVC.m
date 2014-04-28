@@ -123,17 +123,20 @@
     PFFile * imageFile = [PFFile fileWithName:@"image.png" data:imageData]; //file name on Parse, you set it
     
     PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
+    
+    [newSelfy setObject:[PFUser currentUser] forKey:@"parent"];
+
     newSelfy[@"caption"] = newCaption.text;
     newSelfy[@"image"] = imageFile;  //creates a new row with column "image" and data "imageFile"
     
     [newSelfy saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+       
         NSLog(@"%u", succeeded);
         [self cancelNewSelfy];
     }];
     
-
-    //// remove keyboard, not really necessary since you will be dismissing the view post completion
     
+///// remove keyboard, not really necessary since you will be dismissing the view post completion
 //    [newCaption resignFirstResponder];
 //    
 //    [UIView animateWithDuration:0.2 animations:^{

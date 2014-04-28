@@ -131,17 +131,17 @@
 {
     PFQuery * query = [PFQuery queryWithClassName:@"UserSelfy"];
     
-    // change order by created date, newest first.
+    [query orderByDescending:@"createdAt"];
     
     // after user connected to selfy : filter only your user's selfies (requires parent in SLFNewSelfyVC.m)
     
-    
-    
-[query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
    
     listItems = objects;
     
     [self.tableView reloadData];
+        
+
 }];
  
 }
