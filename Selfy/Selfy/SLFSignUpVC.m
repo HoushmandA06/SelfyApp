@@ -9,6 +9,9 @@
 #import "SLFSignUpVC.h"
 #import "SLFTableViewController.h"
 #import "SLFNewNavigationController.h"
+#import <Parse/Parse.h>
+
+
 
 @interface SLFSignUpVC ()
 
@@ -17,14 +20,17 @@
 @implementation SLFSignUpVC
 {
     UIView *newForm;
-    UITextField * nameField;
-    UITextField * displayNameField;
-    UITextField * pwField;
-    UITextField * emailField;
+    
+//    UITextField * nameField;
+//    UITextField * displayNameField;
+//    UITextField * pwField;
+//    UITextField * emailField;
+    
     UIImageView * avatar;
     
-    NSArray * fields;
-    
+    NSArray * fieldNames;
+    NSMutableArray * fields;
+
 }
 
 
@@ -49,27 +55,34 @@
     
     
     
-    fields = @[@"Username", @"Password", @"Display Name", @"Email"];
+    fieldNames = @[@"Username", @"Password", @"Display Name", @"Email"];
     
-    for (NSString * name in fields)
+    fields = [@[]mutableCopy];
+    
+    
+    for (NSString * name in fieldNames)
     {
-        NSInteger index = [fields indexOfObject:name];
+        NSInteger index = [fieldNames indexOfObject:name];
        
-        UITextField * textField = [[UITextField alloc] initWithFrame:CGRectMake(20,index * 50,240,40)];
+        UITextField * textField = [[UITextField alloc] initWithFrame:CGRectMake(20,(index * 50)+50,240,40)];
         textField.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
         textField.layer.cornerRadius = 10;
         textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
         textField.leftViewMode = UITextFieldViewModeAlways;
-        textField.placeholder = @"Enter username";
+        textField.placeholder = name;
         textField.autocorrectionType = FALSE;
         textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
         textField.delegate = self;
         [textField resignFirstResponder]; //this is what makes keyboard go away
-        [newForm addSubview:textField];
-    }
         
+        [fields addObject:textField];
+        
+        [newForm addSubview:textField];
+        
+    }
     
-    
+    //// replaced below with a for loop above
+    /*
     nameField = [[UITextField alloc] initWithFrame:CGRectMake(20,50,240,40)];
     nameField.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
     nameField.layer.cornerRadius = 10;
@@ -122,6 +135,7 @@
     [newForm addSubview:emailField];
     [emailField resignFirstResponder]; //this is what makes keyboard go away
     emailField.delegate = self;
+    */
     
     avatar = [[UIImageView alloc] initWithFrame:CGRectMake(115,250,50,50)]; // need to make it listen to touches
     avatar.layer.cornerRadius = 25;
@@ -133,7 +147,7 @@
     [avatar.layer setBorderWidth: 2.0];
     [newForm addSubview:avatar];
     
-    UIButton * submitSignUp = [[UIButton alloc] initWithFrame:CGRectMake(20, 340, 240, 40)];
+    UIButton * submitSignUp = [[UIButton alloc] initWithFrame:CGRectMake(20, 340, 240, 40)];  //[fieldNames count] * 50
     submitSignUp.backgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
     [submitSignUp setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [submitSignUp setTitle:@"Submit" forState:UIControlStateNormal];
@@ -141,7 +155,7 @@
     [submitSignUp addTarget:self action:@selector(submitSignUp) forControlEvents:UIControlEventTouchUpInside];
     [newForm addSubview:submitSignUp];
     
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyBoard)]; //added this to get rid of keyboard with a touch on frame outside of the above items
     [self.view addGestureRecognizer:tap];
     
 }
@@ -153,25 +167,70 @@
 
 -(void)moveNewFormToCaterForVirtualKeyboard
 {
+    
     newForm.frame = CGRectMake(20,-50, 320, self.view.frame.size.height);
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+//- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField  // method to force user to fill out fields sequentially
+//{
+//    
+//    NSInteger index = [fields indexOfObject:textField];
+//    NSInteger emptyIndex = [fields count];
+//    
+//    for (UITextField * textFieldItem in fields)
+//    {
+//        NSInteger fieldIndex = [fields indexOfObject:textFieldItem];
+//        
+//        if(emptyIndex == [fields count])
+//        {
+//            if([textFieldItem.text isEqualToString:@""])
+//            {
+//             emptyIndex = fieldIndex;
+//            }
+//        }
+//    }
+//    
+//    NSLog(@"textFieldIndex: %d",(int)index);
+//    NSLog(@"emptyIndex : %d",(int)emptyIndex);
+//    
+//    if(index <= emptyIndex) return YES;
+//    return NO;
+//}
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    
+//    NSLog(@"%.00f",self.view.frame.size.height);
+//    
+//    int extraSlide = 0;
+//    
+//    if(self.view.frame.size.height > 500)  // 504h for 4"
+//    {
+//        extraSlide = 107;
+//    } else {                               // 416 h for 3.5"
+//        
+//        NSInteger index = [fields indexOfObject:textField];
+//        extraSlide = index * 25 + 65;
+//    }
+    
     [UIView animateWithDuration:0.2 animations:^{
         [self moveNewFormToCaterForVirtualKeyboard];
     }];
-    return YES;
+    
+    //   newForm.frame = CGRectMake(20,-50, 320, self.view.frame.size.height)  or  [self moveNewFormToCaterForVirtualKeyboard];
+
 }
 
--(void)tapScreen // moves frame back down, removes keyboard
+-(void)hideKeyBoard // moves frame back down, removes keyboard
 {
-    [nameField resignFirstResponder];
-    [pwField resignFirstResponder];
-    [emailField resignFirstResponder];
-    [displayNameField resignFirstResponder];
     
-    [UIView animateWithDuration:0.2 animations:^{
+    for (UITextField * textFieldItem in fields)
+    {
+        [textFieldItem resignFirstResponder];
+    }
+
+    [UIView animateWithDuration:0.3 animations:^{
         [self moveNewFormToOriginalPosition];
     }];
     
@@ -198,42 +257,50 @@
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
--(void)cancelSignUp
-{
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
-    }];
-}
-
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     [self createForm];
 }
 
+-(void)cancelSignUp
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
 -(void)submitSignUp
 {
 
-   
-///////// NEED PARSE CODE HERE
+    PFUser * user = [PFUser user];
+    user.username = ((UITextField *)fields[0]).text;
+    user.password = ((UITextField *)fields[1]).text;
+    user.email = ((UITextField *)fields[3]).text;
     
-/*
-    NSData * imageData = UIImagePNGRepresentation(avatarFrame.image);
-    PFFile * imageFile = [PFFile fileWithName:@"image.png" data:imageData]; //file name on Parse, you set it
-    PFObject * newSignUp = [PFObject objectWithClassName:@"user"];
-    newSignUp[@"image"] = imageFile;  //creates a new row with column "image" and data "imageFile"
+    user[@"displayName"] = ((UITextField *) fields[2]).text;
     
-    newSignUp[@"name"] = nameField.text;
-    newSignUp[@"password"] = pwField.text;
-    newSignUp[@"display"] = displayName.text;
-    newSignUp[@"email"] = email.text;
-    newSignUp[@"parent"] = [PFUser currentUser];
-    
-    [newSelfy saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        NSLog(@"%u", succeeded);
-        
+    [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (error == nil)
+        {
+            // show tableview
+            
+            UINavigationController * pnc = (UINavigationController *)self.presentingViewController;
+            
+            pnc.navigationBarHidden = NO;
+            pnc.navigationBar.translucent = NO;
+            pnc.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
+            [self cancelSignUp];
+
+            
+        } else {
+            
+            NSString * errorDescription = error.userInfo[@"error"];
+            
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"Username Taken" message:errorDescription delegate:self cancelButtonTitle:@"Try Another USername" otherButtonTitles:nil];
+            [alertView show];
+        }
     }];
-*/
-    
+
     
 // ASK JO WHAT IS THE DIFFERENCE BETWEEN TWO TVC SWITCHING METHODS BELOW
    
@@ -249,10 +316,7 @@
 //    }];
     
     
-    self.navigationController.navigationBarHidden = NO;
-    self.navigationController.navigationBar.translucent = NO;
-    self.navigationController.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
-        
+    
 }
 
 

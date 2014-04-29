@@ -115,14 +115,13 @@
 - (void)signIn // this will collect info from button -- THIS WILL NEED TO BE EXISTING USER SIGN IN
 {
     
-    PFUser * user = [PFUser currentUser];
-    user.username = nameField.text;
-    user.password = pwField.text;
+//    PFUser * user = [PFUser currentUser];
+//    user.username = nameField.text;
+//    user.password = pwField.text;
+//    
+//    nameField.text = nil;
+//    pwField.text = nil;
     
-    nameField.text = nil;
-    pwField.text = nil;
-    
-        
     [nameField resignFirstResponder];
     [pwField resignFirstResponder];
     
@@ -132,30 +131,30 @@
     [ai startAnimating];
     [self.view addSubview:ai];   // can set to center by adding it to self.view.frame
     
-    [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-      
-    if (error == nil)
-      {
-          self.navigationController.navigationBarHidden = NO;
-          self.navigationController.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
-          
-      } else {
+    [PFUser  logInWithUsernameInBackground:nameField.text password:pwField.text block:^(PFUser *user, NSError *error)
+     
+    {
+        if (error == nil)
+        {
+            self.navigationController.navigationBarHidden = NO;
+            self.navigationController.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
+            
+        } else {
+            
+            pwField.text = nil;
+            
+            [ai removeFromSuperview];
+            NSString * errorDescription = error.userInfo[@"error"];
+    
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Username Taken" message:errorDescription delegate:self cancelButtonTitle:@"Try Another Username" otherButtonTitles:nil];
+            [alertView show];
+            
+        }
         
-          // NSString * errorDescription = error.userInfo[@"error"]; dont need this because i passed the code instead of sep object
-          
-          [ai removeFromSuperview];
-          
-          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"User error" message:error.userInfo[@"error"] delegate:self cancelButtonTitle:@"Try Again" otherButtonTitles:nil];
-          [alertView show];
-          
-      }
-          
-      }];
-
-    NSLog(@"clicking");
-    NSLog(@"%@ : %@",nameField.text,pwField.text);
+    }];
 
 }
+
 
 
 -(void)tapScreen // removes keyboard when clicking outside of fields or buttons
