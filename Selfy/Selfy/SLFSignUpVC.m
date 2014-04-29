@@ -184,15 +184,29 @@
 {
 
    
-    ///////// NEED PARSE CODE HERE
+///////// NEED PARSE CODE HERE
+    
+/*
+    NSData * imageData = UIImagePNGRepresentation(avatarFrame.image);
+    PFFile * imageFile = [PFFile fileWithName:@"image.png" data:imageData]; //file name on Parse, you set it
+    PFObject * newSignUp = [PFObject objectWithClassName:@"user"];
+    newSignUp[@"image"] = imageFile;  //creates a new row with column "image" and data "imageFile"
+    
+    newSignUp[@"name"] = nameField.text;
+    newSignUp[@"password"] = pwField.text;
+    newSignUp[@"display"] = displayName.text;
+    newSignUp[@"email"] = email.text;
+    newSignUp[@"parent"] = [PFUser currentUser];
+    
+    [newSelfy saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        NSLog(@"%u", succeeded);
+        
+    }];
+*/
     
     
-    
-    
-    
-    
-    
-    
+// ASK JO WHAT IS THE DIFFERENCE BETWEEN TWO TVC SWITCHING METHODS BELOW
+   
 //    SLFTableViewController * newTVC = [[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain];
 //    
 //    SLFNewNavigationController * nc = [[SLFNewNavigationController alloc] initWithRootViewController:newTVC];
@@ -204,12 +218,12 @@
 //        
 //    }];
     
-    // ASK JO WHAT IS THE DIFFERENCE BETWEEN ABOVE AND BELOW
     
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
     
+
     
 }
 

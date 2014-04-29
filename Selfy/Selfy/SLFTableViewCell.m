@@ -53,45 +53,49 @@
 - (void)setProfileInfo:(PFObject *)profileInfo; // THIS IS A SETTER
 {
     
-    
-    
-    
-//    NSString *imageUrlString = profileInfo[@"image"];
-//    //  NSURL *imageURL = [[NSURL alloc] URLWithString:profileInfo[@"image"]];  this way combines line 55 above and line 57 below
-//    NSURL *imageUrl = [[NSURL alloc] initWithString:imageUrlString];
-//    NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
-//    UIImage *image = [UIImage imageWithData:imageData];
-
-    
     PFFile * imageFile = [profileInfo objectForKey:@"image"];
     [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
-    
     UIImage * image = [UIImage imageWithData:data];
     selfyView.image = image;
-        
     } progressBlock:^(int percentDone) {
       
         // do something 
-        
     }];
-    
     selfyView.contentMode = UIViewContentModeScaleAspectFit;
    
-    // selfyCaption.text = profileInfo[@"caption"];  not using this anymore, now getting it from parse
     
+    // selfyCaption.text = profileInfo[@"caption"];  not using this anymore, now getting it from parse
     selfyCaption.text = [profileInfo objectForKey:@"caption"];
 
-    
-    
-//    NSString *avatarUrlString = profileInfo[@"avatar"];
-//    NSURL *avatarUrl = [[NSURL alloc] initWithString:avatarUrlString];
-//    NSData *avatarData = [NSData dataWithContentsOfURL:avatarUrl];
-//    UIImage *avatarImage = [UIImage imageWithData:avatarData];
-//    selfyAvatar.image = avatarImage;
-//    selfyAvatar.contentMode = UIViewContentModeScaleAspectFit;
-
+// this would be the code for the the tableviewcell to get avatar from parse (that was submitted via SLFSignUpVC)
+/*
+    PFFile * avatarFile = [profileInfo objectForKey:@"avatar"];
+    [avatarFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+        UIImage * avatar = [UIImage imageWithData:data];
+        selfyAvatar.image = avatar;
+    } progressBlock:^(int percentDone) {
+    }];
+    selfyAvatar.image = [profileInfo objectForKey:@"avatar"];
+*/
     
     _profileInfo = profileInfo;
+    
+    
+
+    
+    ///////////// grabbing image from URL, no longer using it (getting from Parse)
+    //    NSString *imageUrlString = profileInfo[@"image"];
+    //    //  NSURL *imageURL = [[NSURL alloc] URLWithString:profileInfo[@"image"]];  this way combines line 55 above and line 57 below
+    //    NSURL *imageUrl = [[NSURL alloc] initWithString:imageUrlString];
+    //    NSData *imageData = [NSData dataWithContentsOfURL:imageUrl];
+    //    UIImage *image = [UIImage imageWithData:imageData];
+    
+    //    NSString *avatarUrlString = profileInfo[@"avatar"];
+    //    NSURL *avatarUrl = [[NSURL alloc] initWithString:avatarUrlString];
+    //    NSData *avatarData = [NSData dataWithContentsOfURL:avatarUrl];
+    //    UIImage *avatarImage = [UIImage imageWithData:avatarData];
+    //    selfyAvatar.image = avatarImage;
+    //    selfyAvatar.contentMode = UIViewContentModeScaleAspectFit;
     
 }
 

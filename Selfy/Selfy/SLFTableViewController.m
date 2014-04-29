@@ -148,9 +148,7 @@
     
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-   
-        
-        
+
         
     listItems = objects;
     

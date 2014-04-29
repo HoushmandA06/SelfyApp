@@ -122,15 +122,12 @@
 -(void)newSelfy
 {
     
-
-    // connect current user to newSelfy as parent (look at parse documentation relational queries)
-    
     NSData * imageData = UIImagePNGRepresentation(newImageFrame.image);
     PFFile * imageFile = [PFFile fileWithName:@"image.png" data:imageData]; //file name on Parse, you set it
     PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
+    newSelfy[@"image"] = imageFile;  //creates a new row with column "image" and data "imageFile"
     
     newSelfy[@"caption"] = newCaption.text;
-    newSelfy[@"image"] = imageFile;  //creates a new row with column "image" and data "imageFile"
     newSelfy[@"parent"] = [PFUser currentUser];
     
     [newSelfy saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
