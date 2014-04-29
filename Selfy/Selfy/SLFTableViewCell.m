@@ -76,6 +76,12 @@
     }];
     
     selfyView.contentMode = UIViewContentModeScaleAspectFit;
+   
+    // selfyCaption.text = profileInfo[@"caption"];  not using this anymore, now getting it from parse
+    
+    selfyCaption.text = [profileInfo objectForKey:@"caption"];
+
+    
     
 //    NSString *avatarUrlString = profileInfo[@"avatar"];
 //    NSURL *avatarUrl = [[NSURL alloc] initWithString:avatarUrlString];
@@ -84,12 +90,6 @@
 //    selfyAvatar.image = avatarImage;
 //    selfyAvatar.contentMode = UIViewContentModeScaleAspectFit;
 
-    // selfyCaption.text = profileInfo[@"caption"];  not using this anymore, now getting it from parse
-    
-    selfyCaption.text = [profileInfo objectForKey:@"caption"];
-    
-    
-//    selfyUserId.text = profileInfo[@"userid"];
     
     _profileInfo = profileInfo;
     
