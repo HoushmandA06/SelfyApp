@@ -24,7 +24,6 @@
     if (self) {
         // Initialization code
        
-
 //      self.backgroundColor = [UIColor blackColor];
         
         selfyView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 300, 300)];
@@ -34,6 +33,7 @@
         
         selfyAvatar = [[UIImageView alloc] initWithFrame:CGRectMake(35, 320, 40, 40)];
         selfyAvatar.layer.cornerRadius = 20;
+        selfyAvatar.backgroundColor = [UIColor lightGrayColor];
         selfyAvatar.layer.masksToBounds = YES;
         [self.contentView addSubview:selfyAvatar];
         

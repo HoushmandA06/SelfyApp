@@ -10,6 +10,7 @@
 #import "SLFTableViewCell.h"
 #import "SLFNewNavigationController.h"
 #import "SLFNewSelfyVC.h"
+#import "SLFSettingsButton.h"
 
 #import <Parse/Parse.h>
 
@@ -20,6 +21,8 @@
 @implementation SLFTableViewController
 {
     NSArray * listItems;
+    UIBarButtonItem * settingsButton;
+    SLFSettingsButton * settingsView;
 }
 
 
@@ -75,18 +78,59 @@
     self.navigationItem.rightBarButtonItem = addNewSelfyButton;
     addNewSelfyButton.tintColor = BLUE_COLOR;
     
-    UIBarButtonItem * settingsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(settingsButtonAction)];
+//    UIBarButtonItem * settingsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(settingsButtonAction)];
+//    self.navigationItem.leftBarButtonItem = settingsButton;
+//    settingsButton.tintColor = BLUE_COLOR;
+    
+    
+    settingsView = [[SLFSettingsButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    settingsView.backgroundColor = [UIColor redColor];
+    [settingsView addTarget:self action:@selector(settingsButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    
+    settingsButton = [[UIBarButtonItem alloc] initWithCustomView:settingsView];
     self.navigationItem.leftBarButtonItem = settingsButton;
     settingsButton.tintColor = BLUE_COLOR;
     
+    
 }
+
 
 -(void)settingsButtonAction
 {
-
     
+    [UIView animateWithDuration:0.2 animations:^{
+    
+    settingsView.settingsButtonSelected = YES;
 
+    self.navigationController.view.frame = CGRectMake(SCREEN_WIDTH - 50,0, 320, self.view.frame.size.height);
+        
+    
+        
+    settingsView = [[SLFSettingsButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    settingsView.backgroundColor = [UIColor blueColor];
+    [settingsView addTarget:self action:@selector(settingsButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        
+    settingsButton = [[UIBarButtonItem alloc] initWithCustomView:settingsView];
+    self.navigationItem.leftBarButtonItem = settingsButton;
+    settingsButton.tintColor = BLUE_COLOR;
+        
+    }];
+    NSLog(@"%@clicked",settingsButton);
+    
+    //// code to make settingsViewController current view
+    
 }
+
+-(void)cancelSettingsButtonAction
+{
+    
+    
+    
+}
+
+
+
+
 
 
 
