@@ -52,7 +52,7 @@
     PFUser * user = [PFUser currentUser];
     NSString * username = user.username;
     
-    username = nil;
+    // username = nil;
     
     
     if(username == nil)

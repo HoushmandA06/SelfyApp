@@ -85,7 +85,7 @@
     
     
     settingsView = [[SLFSettingsButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
-    settingsView.backgroundColor = [UIColor redColor];
+    settingsView.backgroundColor = [UIColor clearColor];
     [settingsView addTarget:self action:@selector(settingsButtonAction) forControlEvents:UIControlEventTouchUpInside];
     
     settingsButton = [[UIBarButtonItem alloc] initWithCustomView:settingsView];
@@ -157,7 +157,9 @@
 - (void)viewWillAppear:(BOOL)animated //happens right after viewDidLoad
 {
     
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor =  [UIColor colorWithWhite:0.95 alpha:1.0];
+    self.navigationController.navigationBar.tintColor = BLUE_COLOR;
+    
     [self refreshSelfies];
 
 }

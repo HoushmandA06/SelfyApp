@@ -17,7 +17,7 @@
 
         self.lines = [@[] mutableCopy];
         self.lineWidth = 2.0;  // default width
-        self.lineColor = BLUE_COLOR;
+        
     }
     return self;
 }
@@ -25,20 +25,43 @@
 -(void)drawRect:(CGRect)rect
 {
  
-//    CGContextRef context = UIGraphicsGetCurrentContext();  //addellipseinrect, fill path ---> play with CGContext Reference
-//    CGContextSetLineCap(context, kCGLineCapRound);
-//    CGContextSetLineJoin(context, kCGLineJoinRound);
-//    CGContextSetLineWidth(context, self.lineWidth);
-//    
-//    CGContextMoveToPoint(context, 50, 50);
-//    CGContextAddCurveToPoint(context, 270, 50, 270, 400, 50, 400);
-//    CGContextStrokePath(context);
-//    
-//    CGContextMoveToPoint(context, 100, 100);
-//    CGContextFillEllipseInRect(context, CGRectMake(75, 75, 50, 50)); //makes a filled circle
-//    CGContextStrokePath(context);
-//    CGContextFillRect (context, CGRectMake (50, 150, 100, 200));
+    CGContextRef context = UIGraphicsGetCurrentContext();  //addellipseinrect, fill path ---> play with CGContext Reference
+    CGContextSetLineCap(context, kCGLineCapRound);
+    CGContextSetLineJoin(context, kCGLineJoinRound);
+    CGContextSetLineWidth(context, self.lineWidth);
     
+    [self.tintColor set];
+ 
+    
+////// Three Lines "Settings"
+    
+//    CGContextMoveToPoint(context, 1, 1);
+//    CGContextAddLineToPoint(context, 19, 1);
+//    
+//    CGContextMoveToPoint(context, 1, 10);
+//    CGContextAddLineToPoint(context, 19, 10);
+//
+//    CGContextMoveToPoint(context, 1, 19);
+//    CGContextAddLineToPoint(context, 19, 19);
+//    
+//    CGContextStrokePath(context);
+    
+  
+////// X "Cancel"
+    
+    CGContextMoveToPoint(context, 1, 1);
+    CGContextAddLineToPoint(context, 19, 19);
+    
+    CGContextMoveToPoint(context, 1, 19);
+    CGContextAddLineToPoint(context, 19, 1);
+
+    CGContextStrokePath(context);
+    
+    
+    
+    
+    
+
 }
 
 /*
