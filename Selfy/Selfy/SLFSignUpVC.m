@@ -36,6 +36,8 @@
 }
 
 
+
+
 -(void)createForm
 {
     
@@ -113,8 +115,49 @@
     [submitSignUp addTarget:self action:@selector(submitSignUp) forControlEvents:UIControlEventTouchUpInside];
     [newForm addSubview:submitSignUp];
     
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
+    [self.view addGestureRecognizer:tap];
     
+}
+
+-(void)moveNewFormToOriginalPosition
+{
+    newForm.frame = CGRectMake(20,20, 320, self.view.frame.size.height);
+}
+
+-(void)moveNewFormToCaterForVirtualKeyboard
+{
+    newForm.frame = CGRectMake(20,-50, 320, self.view.frame.size.height);
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        [self moveNewFormToCaterForVirtualKeyboard];
+    }];
+    return YES;
+}
+
+-(void)tapScreen // moves frame back down, removes keyboard
+{
+    [nameField resignFirstResponder];
+    [pwField resignFirstResponder];
+    [email resignFirstResponder];
+    [displayName resignFirstResponder];
     
+    [UIView animateWithDuration:0.2 animations:^{
+        [self moveNewFormToOriginalPosition];
+    }];
+    
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)textField   //now any textField will allow resign keyboard
+{
+    [textField resignFirstResponder];
+    [UIView animateWithDuration:0.2 animations:^{
+        [self moveNewFormToOriginalPosition];
+    }];
+    return YES;
 }
 
 - (void)viewDidLoad
@@ -128,13 +171,18 @@
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [self createForm];
+}
 
 -(void)submitSignUp
 {
 
     
     
-    
+
 }
 
 -(void)cancelSignUp
@@ -144,13 +192,6 @@
     }];
 
 }
-
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [self createForm];
-}
-
 
 
 - (void)didReceiveMemoryWarning

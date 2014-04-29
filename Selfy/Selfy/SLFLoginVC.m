@@ -29,29 +29,40 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
 
-        self.view.backgroundColor = [UIColor orangeColor];
+        self.view.backgroundColor = BLUE_COLOR;
+        
+        UILabel * titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, 50, 240, 40)];
+        titleLabel.font = [UIFont fontWithName:@"Chalkduster" size:24];
+        titleLabel.textColor = [UIColor whiteColor];
+        titleLabel.text = @"Selfy 1.0";
+        [self.view addSubview:titleLabel];
+        
         
 
         // animate up the login form
         nameField = [[UITextField alloc] initWithFrame:CGRectMake(40,100,240,40)];
-        nameField.backgroundColor = [UIColor lightGrayColor];
+        nameField.backgroundColor = [UIColor colorWithWhite:.90 alpha:1.0];
         nameField.layer.cornerRadius = 10;
         nameField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
         nameField.leftViewMode = UITextFieldViewModeAlways;
         nameField.placeholder = @"Enter username";
         nameField.autocorrectionType = FALSE;
         nameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        [nameField.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
+        [nameField.layer setBorderWidth: 2.0];
         [self.view addSubview:nameField];
         
         [nameField resignFirstResponder]; //this is what makes keyboard go away
         nameField.delegate = self;
         
         pwField = [[UITextField alloc] initWithFrame:CGRectMake(40,160,240,40)];
-        pwField.backgroundColor = [UIColor lightGrayColor];
+        pwField.backgroundColor = [UIColor colorWithWhite:.90 alpha:1.0];
         pwField.layer.cornerRadius = 10;
         pwField.secureTextEntry = YES;
         pwField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
         pwField.leftViewMode = UITextFieldViewModeAlways;
+        [pwField.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
+        [pwField.layer setBorderWidth: 2.0];
         pwField.placeholder = @"Enter password";
         
         [self.view addSubview:pwField];
@@ -65,9 +76,9 @@
         [current addTarget:self action:@selector(newUser) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:current];
   
-        UILabel * newUserQuery = [[UILabel alloc] initWithFrame:CGRectMake(50, 310, 240, 20)];
+        UILabel * newUserQuery = [[UILabel alloc] initWithFrame:CGRectMake(60, 310, 240, 20)];
         newUserQuery.text = @"Don't have an account? Click below:";
-        newUserQuery.font = [UIFont fontWithName:@"Helvetica" size:12];
+        newUserQuery.font = [UIFont fontWithName:@"Chalkduster" size:10];
         newUserQuery.textColor = [UIColor whiteColor];
         [self.view addSubview:newUserQuery];
         
