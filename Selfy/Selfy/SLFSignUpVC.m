@@ -7,6 +7,8 @@
 //
 
 #import "SLFSignUpVC.h"
+#import "SLFTableViewController.h"
+#import "SLFNewNavigationController.h"
 
 @interface SLFSignUpVC ()
 
@@ -168,6 +170,7 @@
 
     cancelSignUp.tintColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = cancelSignUp;
+    
     [self setNeedsStatusBarAppearanceUpdate];
 }
 
@@ -180,9 +183,34 @@
 -(void)submitSignUp
 {
 
+   
+    ///////// NEED PARSE CODE HERE
     
     
-
+    
+    
+    
+    
+    
+    
+//    SLFTableViewController * newTVC = [[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain];
+//    
+//    SLFNewNavigationController * nc = [[SLFNewNavigationController alloc] initWithRootViewController:newTVC];
+//    
+//    nc.navigationBar.barTintColor = BLUE_COLOR;
+//    nc.navigationBar.translucent = NO;
+//    
+//    [self.navigationController presentViewController:nc animated:YES completion:^{
+//        
+//    }];
+    
+    // ASK JO WHAT IS THE DIFFERENCE BETWEEN ABOVE AND BELOW
+    
+    self.navigationController.navigationBarHidden = NO;
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
+    
+    
 }
 
 -(void)cancelSignUp

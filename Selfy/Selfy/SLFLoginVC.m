@@ -37,8 +37,6 @@
         titleLabel.text = @"Selfy 1.0";
         [self.view addSubview:titleLabel];
         
-        
-
         // animate up the login form
         nameField = [[UITextField alloc] initWithFrame:CGRectMake(40,100,240,40)];
         nameField.backgroundColor = [UIColor colorWithWhite:.90 alpha:1.0];
@@ -132,7 +130,7 @@
     ai.color = [UIColor whiteColor];
     ai.frame = CGRectMake(160, 200, 75.0, 75.0);
     [ai startAnimating];
-    [self.view addSubview:ai];   // can set to senter by adding it to self.view.frame
+    [self.view addSubview:ai];   // can set to center by adding it to self.view.frame
     
     [user saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
       
