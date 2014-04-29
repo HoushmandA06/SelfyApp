@@ -16,13 +16,14 @@
 
 @implementation SLFSignUpVC
 {
-    UITextField * nameField;
-    UITextField * pwField;
-    UITextField * displayName;
-    UITextField * email;
-    UIImageView * avatarFrame;
-    
     UIView *newForm;
+    UITextField * nameField;
+    UITextField * displayNameField;
+    UITextField * pwField;
+    UITextField * emailField;
+    UIImageView * avatar;
+    
+    NSArray * fields;
     
 }
 
@@ -32,11 +33,11 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+
+        self.view.backgroundColor = [UIColor whiteColor]; //put this in to make transition from login to sign up not show old view in animation
     }
     return self;
 }
-
 
 
 
@@ -45,6 +46,29 @@
     
     newForm = [[UIView alloc] initWithFrame:CGRectMake(20,20,280,self.view.frame.size.height - 40)];
     [self.view addSubview:newForm];
+    
+    
+    
+    fields = @[@"Username", @"Password", @"Display Name", @"Email"];
+    
+    for (NSString * name in fields)
+    {
+        NSInteger index = [fields indexOfObject:name];
+       
+        UITextField * textField = [[UITextField alloc] initWithFrame:CGRectMake(20,index * 50,240,40)];
+        textField.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+        textField.layer.cornerRadius = 10;
+        textField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
+        textField.leftViewMode = UITextFieldViewModeAlways;
+        textField.placeholder = @"Enter username";
+        textField.autocorrectionType = FALSE;
+        textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+        textField.delegate = self;
+        [textField resignFirstResponder]; //this is what makes keyboard go away
+        [newForm addSubview:textField];
+    }
+        
+    
     
     nameField = [[UITextField alloc] initWithFrame:CGRectMake(20,50,240,40)];
     nameField.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
@@ -73,41 +97,41 @@
     pwField.delegate = self;
     
     
-    displayName = [[UITextField alloc] initWithFrame:CGRectMake(20,150,240,40)];
-    displayName.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
-    displayName.layer.cornerRadius = 10;
-    displayName.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
-    displayName.leftViewMode = UITextFieldViewModeAlways;
-    displayName.placeholder = @"Enter display name";
-    displayName.autocorrectionType = FALSE;
-    displayName.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    displayNameField = [[UITextField alloc] initWithFrame:CGRectMake(20,150,240,40)];
+    displayNameField.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+    displayNameField.layer.cornerRadius = 10;
+    displayNameField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
+    displayNameField.leftViewMode = UITextFieldViewModeAlways;
+    displayNameField.placeholder = @"Enter display name";
+    displayNameField.autocorrectionType = FALSE;
+    displayNameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 
-    [newForm addSubview:displayName];
-    [displayName resignFirstResponder]; //this is what makes keyboard go away
-    displayName.delegate = self;
+    [newForm addSubview:displayNameField];
+    [displayNameField resignFirstResponder]; //this is what makes keyboard go away
+    displayNameField.delegate = self;
     
-    email = [[UITextField alloc] initWithFrame:CGRectMake(20,200,240,40)];
-    email.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
-    email.layer.cornerRadius = 10;
-    email.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
-    email.leftViewMode = UITextFieldViewModeAlways;
-    email.placeholder = @"Enter email address";
-    email.autocorrectionType = FALSE;
-    email.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    emailField = [[UITextField alloc] initWithFrame:CGRectMake(20,200,240,40)];
+    emailField.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
+    emailField.layer.cornerRadius = 10;
+    emailField.leftView = [[UIView alloc] initWithFrame:CGRectMake(0,0,10,30)]; // puts the cursor a set amt right of the textfield
+    emailField.leftViewMode = UITextFieldViewModeAlways;
+    emailField.placeholder = @"Enter email address";
+    emailField.autocorrectionType = FALSE;
+    emailField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     
-    [newForm addSubview:email];
-    [email resignFirstResponder]; //this is what makes keyboard go away
-    email.delegate = self;
+    [newForm addSubview:emailField];
+    [emailField resignFirstResponder]; //this is what makes keyboard go away
+    emailField.delegate = self;
     
-    avatarFrame = [[UIImageView alloc] initWithFrame:CGRectMake(115,250,50,50)]; // need to make it listen to touches
-    avatarFrame.layer.cornerRadius = 25;
-    avatarFrame.layer.masksToBounds = YES;
-    avatarFrame.contentMode = UIViewContentModeScaleToFill;
-    avatarFrame.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
-    avatarFrame.image = [UIImage imageNamed:@"greenmonster"];
-    [avatarFrame.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
-    [avatarFrame.layer setBorderWidth: 2.0];
-    [newForm addSubview:avatarFrame];
+    avatar = [[UIImageView alloc] initWithFrame:CGRectMake(115,250,50,50)]; // need to make it listen to touches
+    avatar.layer.cornerRadius = 25;
+    avatar.layer.masksToBounds = YES;
+    avatar.contentMode = UIViewContentModeScaleToFill;
+    avatar.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
+    avatar.image = [UIImage imageNamed:@"greenmonster"];
+    [avatar.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
+    [avatar.layer setBorderWidth: 2.0];
+    [newForm addSubview:avatar];
     
     UIButton * submitSignUp = [[UIButton alloc] initWithFrame:CGRectMake(20, 340, 240, 40)];
     submitSignUp.backgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
@@ -144,8 +168,8 @@
 {
     [nameField resignFirstResponder];
     [pwField resignFirstResponder];
-    [email resignFirstResponder];
-    [displayName resignFirstResponder];
+    [emailField resignFirstResponder];
+    [displayNameField resignFirstResponder];
     
     [UIView animateWithDuration:0.2 animations:^{
         [self moveNewFormToOriginalPosition];
@@ -172,6 +196,12 @@
     self.navigationItem.rightBarButtonItem = cancelSignUp;
     
     [self setNeedsStatusBarAppearanceUpdate];
+}
+
+-(void)cancelSignUp
+{
+    [self.navigationController dismissViewControllerAnimated:YES completion:^{
+    }];
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -222,18 +252,9 @@
     self.navigationController.navigationBarHidden = NO;
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.viewControllers = @[[[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain]];
-    
-
-    
-}
-
--(void)cancelSignUp
-{
-    [self.navigationController dismissViewControllerAnimated:YES completion:^{
         
-    }];
-
 }
+
 
 
 - (void)didReceiveMemoryWarning

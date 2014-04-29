@@ -71,7 +71,7 @@
         [current setImage:[UIImage imageNamed:@"currentuser.png"] forState:UIControlStateNormal];
         current.backgroundColor = [UIColor clearColor];
         current.layer.cornerRadius = 40;
-        [current addTarget:self action:@selector(newUser) forControlEvents:UIControlEventTouchUpInside];
+        [current addTarget:self action:@selector(signIn) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:current];
   
         UILabel * newUserQuery = [[UILabel alloc] initWithFrame:CGRectMake(60, 310, 240, 20)];
@@ -112,7 +112,7 @@
 }
 
 
-- (void)newUser // this will collect info from button -- THIS WILL NEED TO BE EXISTING USER SIGN IN
+- (void)signIn // this will collect info from button -- THIS WILL NEED TO BE EXISTING USER SIGN IN
 {
     
     PFUser * user = [PFUser currentUser];
