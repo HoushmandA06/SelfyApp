@@ -18,7 +18,18 @@
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+
+        
+        self.view.backgroundColor = [UIColor lightGrayColor];
+        
+        UILabel * test = [[UILabel alloc] initWithFrame:CGRectMake(20, 20, 100, 20)];
+        test.text = @"TEST TEXT";
+        test.font = [UIFont fontWithName:@"Chalkduster" size:10];
+        test.textColor = BLUE_COLOR;
+        [self.view addSubview:test];
+        
+    
+    
     }
     return self;
 }
@@ -26,6 +37,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+
+    
     // Do any additional setup after loading the view.
 }
 

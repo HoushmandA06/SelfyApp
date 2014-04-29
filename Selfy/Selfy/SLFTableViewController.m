@@ -11,6 +11,7 @@
 #import "SLFNewNavigationController.h"
 #import "SLFNewSelfyVC.h"
 #import "SLFSettingsButton.h"
+#import "SLFSettingsViewController.h"
 
 #import <Parse/Parse.h>
 
@@ -104,11 +105,13 @@
 
     self.navigationController.view.frame = CGRectMake(SCREEN_WIDTH - 50,0, 320, self.view.frame.size.height);
         
-    
+    UIViewController * settingsViewController = [[SLFSettingsViewController alloc] initWithNibName:nil bundle:nil];
+    settingsViewController.view.frame = CGRectMake(-270, 0, 270, self.view.frame.size.height);
+    [self.navigationController.view addSubview:settingsViewController.view];
         
     settingsView = [[SLFSettingsButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
     settingsView.backgroundColor = [UIColor blueColor];
-    [settingsView addTarget:self action:@selector(settingsButtonAction) forControlEvents:UIControlEventTouchUpInside];
+    [settingsView addTarget:self action:@selector(cancelSettingsButtonAction) forControlEvents:UIControlEventTouchUpInside];
         
     settingsButton = [[UIBarButtonItem alloc] initWithCustomView:settingsView];
     self.navigationItem.leftBarButtonItem = settingsButton;
@@ -123,7 +126,24 @@
 
 -(void)cancelSettingsButtonAction
 {
+    settingsView.settingsButtonSelected = NO;
     
+    [UIView animateWithDuration:0.2 animations:^{
+    
+    self.navigationController.view.frame = CGRectMake(0, 0, 320, self.view.frame.size.height);
+    
+    settingsView = [[SLFSettingsButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    settingsView.backgroundColor = [UIColor redColor];
+    [settingsView addTarget:self action:@selector(settingsButtonAction) forControlEvents:UIControlEventTouchUpInside];
+        
+    settingsButton = [[UIBarButtonItem alloc] initWithCustomView:settingsView];
+    self.navigationItem.leftBarButtonItem = settingsButton;
+    settingsButton.tintColor = BLUE_COLOR;
+        
+    }];
+    
+    
+    NSLog(@"%@clicked cancel",settingsButton);
     
     
 }
