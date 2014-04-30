@@ -28,7 +28,7 @@
 //      self.backgroundColor = [UIColor blackColor];
         
         selfyView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 300, 300)];
-        selfyView.backgroundColor = [UIColor lightGrayColor];
+        selfyView.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.0];
         selfyView.layer.masksToBounds = YES;
         [self.contentView addSubview:selfyView];
         
@@ -54,6 +54,8 @@
 - (void)setProfileInfo:(PFObject *)profileInfo; // THIS IS A SETTER
 {
     
+    _profileInfo = profileInfo;
+    
     PFFile * imageFile = [profileInfo objectForKey:@"image"];
     [imageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
     UIImage * image = [UIImage imageWithData:data];
@@ -62,12 +64,15 @@
       
         // do something 
     }];
+   
     selfyView.contentMode = UIViewContentModeScaleAspectFit;
    
     
     // selfyCaption.text = profileInfo[@"caption"];  not using this anymore, now getting it from parse
+    
     selfyCaption.text = [profileInfo objectForKey:@"caption"];
 
+    
 // this would be the code for the the tableviewcell to get avatar from parse (that was submitted via SLFSignUpVC)
 /*
     PFFile * avatarFile = [profileInfo objectForKey:@"avatar"];
@@ -79,9 +84,23 @@
     selfyAvatar.image = [profileInfo objectForKey:@"avatar"];
 */
     
-    _profileInfo = profileInfo;
+    PFUser * user = [profileInfo objectForKey:@"parent"];
     
+    [user fetchIfNeededInBackgroundWithBlock:^(PFObject *object, NSError *error) {
     
+    PFFile * avatarFile = [object objectForKey:@"avatar"];
+        
+    [avatarFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error) {
+            
+    selfyAvatar.image = [UIImage imageWithData:data];
+        
+    }];
+        
+    }];
+    
+        
+    
+
 
     
     ///////////// grabbing image from URL, no longer using it (getting from Parse)
