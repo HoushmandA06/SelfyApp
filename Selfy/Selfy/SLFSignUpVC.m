@@ -272,11 +272,21 @@
 -(void)submitSignUp
 {
 
+
     PFUser * user = [PFUser user];
+    
+    //UIImage * avatar = [UIImage imageNamed:@"greenmonster"];  // i dont need this because i have UIImage in frame above
+    
+    NSData * imageData = UIImagePNGRepresentation(avatar.image);
+    PFFile * imageFile = [PFFile fileWithName:@"avatar.png" data: imageData];
+    user[@"avatar"] = imageFile;
+
+    // PFUser is a class, has properties, hence why user can do dot notation with username, password, email
     user.username = ((UITextField *)fields[0]).text;
     user.password = ((UITextField *)fields[1]).text;
     user.email = ((UITextField *)fields[3]).text;
-    
+
+    // displayName is a custome field, not a propertyof PFUser, hence the use of @""
     user[@"displayName"] = ((UITextField *) fields[2]).text;
     
     [user signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -302,18 +312,6 @@
     }];
 
     
-// ASK JO WHAT IS THE DIFFERENCE BETWEEN TWO TVC SWITCHING METHODS BELOW
-   
-//    SLFTableViewController * newTVC = [[SLFTableViewController alloc] initWithStyle:UITableViewStylePlain];
-//    
-//    SLFNewNavigationController * nc = [[SLFNewNavigationController alloc] initWithRootViewController:newTVC];
-//    
-//    nc.navigationBar.barTintColor = BLUE_COLOR;
-//    nc.navigationBar.translucent = NO;
-//    
-//    [self.navigationController presentViewController:nc animated:YES completion:^{
-//        
-//    }];
     
     
     
