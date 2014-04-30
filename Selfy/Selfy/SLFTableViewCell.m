@@ -35,6 +35,7 @@
         selfyAvatar = [[UIImageView alloc] initWithFrame:CGRectMake(35, 320, 40, 40)];
         selfyAvatar.layer.cornerRadius = 20;
         selfyAvatar.layer.masksToBounds = YES;
+        selfyAvatar.backgroundColor = [UIColor lightGrayColor];
         [self.contentView addSubview:selfyAvatar];
         
         selfyUserId = [[UILabel alloc] initWithFrame:CGRectMake(10, 320, 40, 40)];

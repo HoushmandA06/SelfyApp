@@ -88,20 +88,53 @@
     settingsButtonView.tintColor = BLUE_COLOR;
     settingsButtonView.toggledTintColor = [UIColor redColor];
     
-    [settingsButtonView addTarget:self action:@selector(openSettings) forControlEvents:UIControlEventTouchUpOutside];
-    
-    UIBarButtonItem * settingsButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButtonView];
+    UIBarButtonItem * settingsButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButtonView];  // still 2 different entities, but settingsButton gets a view inside it of the type SLFSettingsButton
     self.navigationItem.leftBarButtonItem = settingsButton;
     settingsButton.tintColor = BLUE_COLOR;
+    [settingsButtonView addTarget:self action:@selector(openSettings) forControlEvents:UIControlEventTouchUpInside];
     
 }
 
 -(void)openSettings
 {
-
+    [settingsButtonView toggle];
     
-
+//    settingsButtonView.toggled = ![settingsButtonView isToggled]; above line does this
+    
+    int X = [settingsButtonView isToggled] ? SCREEN_WIDTH - 52 : 0; // X gets 270 if true (i.e. toggled), 0 if not
+    
+    NSLog(@"%d", X);
+    
+    
+    [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+        
+        self.navigationController.view.frame = CGRectMake(X, 0, SCREEN_WIDTH, SCREEN_WIDTH);
+    
+    } completion:^(BOOL finished) {
+        
+        if(![settingsButtonView isToggled])
+        {
+            [settingsVC.view removeFromSuperview];
+        }
+        
+    }];
+    
+    
+    if([settingsButtonView isToggled])
+    {
+        settingsVC = [[SLFSettingsVC alloc] initWithNibName:nil bundle:nil];
+        
+        settingsVC.view.frame = CGRectMake(52 - SCREEN_WIDTH, 0, SCREEN_WIDTH - 52, SCREEN_HEIGHT);
+        
+        [self.navigationController.view addSubview:settingsVC.view];
+    }
+        
+        
+        
+        
+    
 }
+
 
 
 
