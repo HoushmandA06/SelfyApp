@@ -15,6 +15,8 @@
 		0FA97A65190E8FF000C03C34 /* boss.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA97A64190E8FF000C03C34 /* boss.png */; };
 		0FA97A67190EE65200C03C34 /* currentuser.png in Resources */ = {isa = PBXBuildFile; fileRef = 0FA97A66190EE65200C03C34 /* currentuser.png */; };
 		0FA97A6D190EEDC700C03C34 /* SLFSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA97A6C190EEDC700C03C34 /* SLFSignUpVC.m */; };
+		0FA97A7619112CA300C03C34 /* SLFSettingsButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA97A7519112CA300C03C34 /* SLFSettingsButton.m */; };
+		0FA97A7C19112D0600C03C34 /* SLFSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA97A7B19112D0600C03C34 /* SLFSettingsVC.m */; };
 		0FABCFBD190588E400B39854 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFBC190588E400B39854 /* Foundation.framework */; };
 		0FABCFBF190588E400B39854 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFBE190588E400B39854 /* CoreGraphics.framework */; };
 		0FABCFC1190588E400B39854 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFC0190588E400B39854 /* UIKit.framework */; };
@@ -66,6 +68,10 @@
 		0FA97A66190EE65200C03C34 /* currentuser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = currentuser.png; path = ../../../../../Downloads/currentuser.png; sourceTree = "<group>"; };
 		0FA97A6B190EEDC700C03C34 /* SLFSignUpVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFSignUpVC.h; sourceTree = "<group>"; };
 		0FA97A6C190EEDC700C03C34 /* SLFSignUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFSignUpVC.m; sourceTree = "<group>"; };
+		0FA97A7419112CA300C03C34 /* SLFSettingsButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFSettingsButton.h; sourceTree = "<group>"; };
+		0FA97A7519112CA300C03C34 /* SLFSettingsButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFSettingsButton.m; sourceTree = "<group>"; };
+		0FA97A7A19112D0600C03C34 /* SLFSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFSettingsVC.h; sourceTree = "<group>"; };
+		0FA97A7B19112D0600C03C34 /* SLFSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFSettingsVC.m; sourceTree = "<group>"; };
 		0FABCFB9190588E400B39854 /* Selfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Selfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FABCFBC190588E400B39854 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0FABCFBE190588E400B39854 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -137,6 +143,8 @@
 		0FA7FEBF1906D2AD00CC0A8C /* Additional VCs */ = {
 			isa = PBXGroup;
 			children = (
+				0FA97A7A19112D0600C03C34 /* SLFSettingsVC.h */,
+				0FA97A7B19112D0600C03C34 /* SLFSettingsVC.m */,
 				0FA7FEC01906D2F400CC0A8C /* SLFLoginVC.h */,
 				0FA7FEC11906D2F400CC0A8C /* SLFLoginVC.m */,
 				0FA97A6B190EEDC700C03C34 /* SLFSignUpVC.h */,
@@ -190,6 +198,8 @@
 		0FABCFC2190588E400B39854 /* Selfy */ = {
 			isa = PBXGroup;
 			children = (
+				0FA97A7419112CA300C03C34 /* SLFSettingsButton.h */,
+				0FA97A7519112CA300C03C34 /* SLFSettingsButton.m */,
 				0FABCFEB1905892C00B39854 /* SLFTableViewController.h */,
 				0FABCFEC1905892C00B39854 /* SLFTableViewController.m */,
 				0FABCFEE19059A6000B39854 /* SLFTableViewCell.h */,
@@ -344,6 +354,8 @@
 			files = (
 				0FA7FEC21906D2F400CC0A8C /* SLFLoginVC.m in Sources */,
 				0FA7FF1F190AEB7A00CC0A8C /* SLFNewNavigationController.m in Sources */,
+				0FA97A7619112CA300C03C34 /* SLFSettingsButton.m in Sources */,
+				0FA97A7C19112D0600C03C34 /* SLFSettingsVC.m in Sources */,
 				0FABCFCD190588E400B39854 /* SLFAppDelegate.m in Sources */,
 				0FABCFF019059A6000B39854 /* SLFTableViewCell.m in Sources */,
 				0FA97A6D190EEDC700C03C34 /* SLFSignUpVC.m in Sources */,

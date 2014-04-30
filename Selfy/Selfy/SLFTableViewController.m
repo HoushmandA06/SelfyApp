@@ -10,6 +10,9 @@
 #import "SLFTableViewCell.h"
 #import "SLFNewNavigationController.h"
 #import "SLFNewSelfyVC.h"
+#import "SLFSettingsVC.h"
+#import "SLFSettingsButton.h"
+
 
 #import <Parse/Parse.h>
 
@@ -20,6 +23,10 @@
 @implementation SLFTableViewController
 {
     NSArray * listItems;
+    
+    SLFSettingsButton * settingsButtonView;
+    SLFSettingsVC * settingsVC;
+    
 }
 
 
@@ -75,13 +82,21 @@
     self.navigationItem.rightBarButtonItem = addNewSelfyButton;
     addNewSelfyButton.tintColor = BLUE_COLOR;
     
-    UIBarButtonItem * settingsButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit target:self action:@selector(settingsButtonAction)];
+//    NSLog(@"%@",(UIView *)[addNewSelfyButton valueForKey:@"view"]); will work in viewwillappear(bool)
+    
+    settingsButtonView = [[SLFSettingsButton alloc] initWithFrame:CGRectMake(0, 0, 20, 20)];
+    settingsButtonView.tintColor = BLUE_COLOR;
+    settingsButtonView.toggledTintColor = [UIColor redColor];
+    
+    [settingsButtonView addTarget:self action:@selector(openSettings) forControlEvents:UIControlEventTouchUpOutside];
+    
+    UIBarButtonItem * settingsButton = [[UIBarButtonItem alloc] initWithCustomView:settingsButtonView];
     self.navigationItem.leftBarButtonItem = settingsButton;
     settingsButton.tintColor = BLUE_COLOR;
     
 }
 
--(void)settingsButtonAction
+-(void)openSettings
 {
 
     
