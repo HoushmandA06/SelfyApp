@@ -108,7 +108,7 @@
     
     [UIView animateWithDuration:0.3 delay:0.0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         
-        self.navigationController.view.frame = CGRectMake(X, 0, SCREEN_WIDTH, SCREEN_WIDTH);
+        self.navigationController.view.frame = CGRectMake(X, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
     
     } completion:^(BOOL finished) {
         
