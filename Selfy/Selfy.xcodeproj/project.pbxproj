@@ -218,11 +218,11 @@
 		0FABCFC3190588E400B39854 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0FABCFCA190588E400B39854 /* Selfy-Prefix.pch */,
 				0FABCFC4190588E400B39854 /* Selfy-Info.plist */,
 				0FABCFC5190588E400B39854 /* InfoPlist.strings */,
 				0FA97A66190EE65200C03C34 /* currentuser.png */,
 				0FABCFC8190588E400B39854 /* main.m */,
-				0FABCFCA190588E400B39854 /* Selfy-Prefix.pch */,
 				0FA7FF1B190A9C2200CC0A8C /* greenmonster.png */,
 				0FABCFF11905AC9000B39854 /* image.png */,
 				0FA7FEBD1906D1E600CC0A8C /* newuser.png */,

@@ -14,6 +14,7 @@
 #import "SLFSettingsButton.h"
 
 
+
 #import <Parse/Parse.h>
 
 @interface SLFTableViewController ()
@@ -26,6 +27,7 @@
     
     SLFSettingsButton * settingsButtonView;
     SLFSettingsVC * settingsVC;
+    
     
 }
 
@@ -94,6 +96,11 @@
     [settingsButtonView addTarget:self action:@selector(openSettings) forControlEvents:UIControlEventTouchUpInside];
     
 }
+
+
+
+
+
 
 -(void)openSettings
 {

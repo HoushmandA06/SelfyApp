@@ -10,4 +10,10 @@
 
 @interface SLFNewSelfyVC : UIViewController <UITextViewDelegate>
 
+
+//@property (strong, nonatomic) UIImageView * newImageFrame;
+//-(void)addNewImageFrameObject:(UIImage *)object;
+//
+
+
 @end

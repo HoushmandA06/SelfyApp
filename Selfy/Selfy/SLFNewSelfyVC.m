@@ -10,7 +10,11 @@
 #import <Parse/Parse.h>
 
 
-@interface SLFNewSelfyVC ()
+@interface SLFNewSelfyVC () <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+
+@property (nonatomic) UIImage * originalImage;  // here so we can put setter / getter
+
+
 
 @end
 
@@ -22,6 +26,8 @@
     
     UIImageView * newImageFrame;
     
+    UIImagePickerController * imagePicker;
+
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -32,6 +38,8 @@
         
     self.view.backgroundColor = [UIColor colorWithWhite:.95 alpha:1.0];
 
+  //   [self createForm];
+        
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
     [self.view addGestureRecognizer:tap];
         
@@ -109,7 +117,7 @@
     newImageFrame.contentMode = UIViewContentModeScaleToFill;
     // newImageFrame.contentMode = UIViewContentModeCenter;
     newImageFrame.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
-    newImageFrame.image = [UIImage imageNamed:@"boss"];
+   // newImageFrame.image = [UIImage imageNamed:@"boss"];
     [newImageFrame.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
     [newImageFrame.layer setBorderWidth: 2.0];
     [newForm addSubview:newImageFrame];
@@ -134,21 +142,15 @@
         NSLog(@"%u", succeeded);
         [self cancelNewSelfy];
     }];
-    
-
-///// remove keyboard, not really necessary since you will be dismissing the view post completion
-//    [newCaption resignFirstResponder];
-//    [UIView animateWithDuration:0.2 animations:^{  //this moves form down
-//        [self moveNewFormToOriginalPosition];
-//    }];
 
 }
 
 
 
-- (void)viewDidLoad
+- (void)viewDidLayoutSubviews
 {
-    [super viewDidLoad];
+    
+  //  [super viewDidLoad]; // what exactly does this do
     
     UIBarButtonItem * cancelNewSelfyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNewSelfy)];
     
@@ -157,7 +159,12 @@
     
     [self setNeedsStatusBarAppearanceUpdate];
     
-    // Do any additional setup after loading the view.
+    UIBarButtonItem * addNewSelfyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(addNewSelfy)];
+    addNewSelfyButton.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem = addNewSelfyButton;
+
+    [self createForm];
+
 }
 
 
@@ -170,10 +177,56 @@
     
 }
 
+-(void)addNewSelfy
+{
+    imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES; // gives you preview of chosen photo
+  //  imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+
+    imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:imagePicker.sourceType];
+    
+    [self presentViewController:imagePicker animated:NO completion:nil];
+    
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    // delegate method of UIImagePickerController
+    // using this method to change self.originalImage to the photo chosen in the library
+    
+    self.originalImage = info[UIImagePickerControllerOriginalImage];
+    
+    NSLog(@"%@",self.originalImage);
+    
+    
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    
+}
+
+-(void)setOriginalImage:(UIImage *)originalImage   //setter method
+{
+    
+    _originalImage = originalImage;
+    
+    newImageFrame.image = originalImage;
+    newImageFrame.contentMode = UIViewContentModeScaleToFill;
+
+    NSLog(@"%@",newImageFrame.image);
+}
+
+-(void)updateCurrentImageWithFilteredImage:(UIImage *)image
+{
+    newImageFrame.image = image;
+}
+
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self createForm];
+ 
 }
 
 
