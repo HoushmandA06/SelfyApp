@@ -17,6 +17,7 @@
 		0FA97A6D190EEDC700C03C34 /* SLFSignUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA97A6C190EEDC700C03C34 /* SLFSignUpVC.m */; };
 		0FA97A7619112CA300C03C34 /* SLFSettingsButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA97A7519112CA300C03C34 /* SLFSettingsButton.m */; };
 		0FA97A7C19112D0600C03C34 /* SLFSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA97A7B19112D0600C03C34 /* SLFSettingsVC.m */; };
+		0FA97B2919158D4C00C03C34 /* SLFFilterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0FA97B2819158D4C00C03C34 /* SLFFilterController.m */; };
 		0FABCFBD190588E400B39854 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFBC190588E400B39854 /* Foundation.framework */; };
 		0FABCFBF190588E400B39854 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFBE190588E400B39854 /* CoreGraphics.framework */; };
 		0FABCFC1190588E400B39854 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0FABCFC0190588E400B39854 /* UIKit.framework */; };
@@ -72,6 +73,8 @@
 		0FA97A7519112CA300C03C34 /* SLFSettingsButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFSettingsButton.m; sourceTree = "<group>"; };
 		0FA97A7A19112D0600C03C34 /* SLFSettingsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFSettingsVC.h; sourceTree = "<group>"; };
 		0FA97A7B19112D0600C03C34 /* SLFSettingsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFSettingsVC.m; sourceTree = "<group>"; };
+		0FA97B2719158D4C00C03C34 /* SLFFilterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLFFilterController.h; sourceTree = "<group>"; };
+		0FA97B2819158D4C00C03C34 /* SLFFilterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLFFilterController.m; sourceTree = "<group>"; };
 		0FABCFB9190588E400B39854 /* Selfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Selfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0FABCFBC190588E400B39854 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		0FABCFBE190588E400B39854 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -143,6 +146,8 @@
 		0FA7FEBF1906D2AD00CC0A8C /* Additional VCs */ = {
 			isa = PBXGroup;
 			children = (
+				0FA97B2719158D4C00C03C34 /* SLFFilterController.h */,
+				0FA97B2819158D4C00C03C34 /* SLFFilterController.m */,
 				0FA97A7A19112D0600C03C34 /* SLFSettingsVC.h */,
 				0FA97A7B19112D0600C03C34 /* SLFSettingsVC.m */,
 				0FA7FEC01906D2F400CC0A8C /* SLFLoginVC.h */,
@@ -356,6 +361,7 @@
 				0FA7FF1F190AEB7A00CC0A8C /* SLFNewNavigationController.m in Sources */,
 				0FA97A7619112CA300C03C34 /* SLFSettingsButton.m in Sources */,
 				0FA97A7C19112D0600C03C34 /* SLFSettingsVC.m in Sources */,
+				0FA97B2919158D4C00C03C34 /* SLFFilterController.m in Sources */,
 				0FABCFCD190588E400B39854 /* SLFAppDelegate.m in Sources */,
 				0FABCFF019059A6000B39854 /* SLFTableViewCell.m in Sources */,
 				0FA97A6D190EEDC700C03C34 /* SLFSignUpVC.m in Sources */,

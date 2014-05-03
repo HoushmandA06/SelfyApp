@@ -7,10 +7,11 @@
 //
 
 #import "SLFNewSelfyVC.h"
+#import "SLFFilterController.h"
 #import <Parse/Parse.h>
 
 
-@interface SLFNewSelfyVC () <UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface SLFNewSelfyVC () <UINavigationControllerDelegate,UIImagePickerControllerDelegate, SLFFilterControllerDelegate>
 
 @property (nonatomic) UIImage * originalImage;  // here so we can put setter / getter
 
@@ -27,6 +28,9 @@
     UIImageView * newImageFrame;
     
     UIImagePickerController * imagePicker;
+    
+    SLFFilterController * filterVC;
+    
 
 }
 
@@ -40,50 +44,13 @@
 
   //   [self createForm];
         
+        
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
     [self.view addGestureRecognizer:tap];
         
     }
     return self;
 }
-
--(void)moveNewFormToOriginalPosition
-{
-    newForm.frame = CGRectMake(20,20, 320, self.view.frame.size.height);
-}
-
-
--(void)moveNewFormToCaterForVirtualKeyboard
-{
-    newForm.frame = CGRectMake(20,-KB_HEIGHT, 320, self.view.frame.size.height);
-}
-
-- (BOOL)textViewShouldBeginEditing:(UITextView *)textView
-{
-    [UIView animateWithDuration:0.2 animations:^{
-        [self moveNewFormToCaterForVirtualKeyboard];
-    }];
-    return YES;
-}
-
--(void)tapScreen // moves frame back down, removes keyboard
-{
-    [newCaption resignFirstResponder];
-    
-    [UIView animateWithDuration:0.2 animations:^{
-        [self moveNewFormToOriginalPosition];
-    }];
-}
-
--(void)textViewDidBeginEditing:(UITextView *)textView  //moves new frame up as keyboard appears.
-{
-    [UIView animateWithDuration:0.2 animations:^{
-        newForm.frame = CGRectMake(20,-KB_HEIGHT, 280, self.view.frame.size.height);
-        
-    }];
-    
-}
-
 
 -(void)createForm
 {
@@ -124,12 +91,54 @@
     
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
     [self.view addGestureRecognizer:tap];
-
+    
+    
+    filterVC = [[SLFFilterController alloc] initWithNibName:nil bundle:nil];
+    filterVC.delegate = self;
+    filterVC.view.frame = CGRectMake(0, 2, SCREEN_WIDTH, 55);
+    filterVC.view.backgroundColor = BLUE_COLOR;
+    [self.view addSubview:filterVC.view];
 }
+
+#pragma FORM & KEYBOARD ANIMATION
+-(void)moveNewFormToOriginalPosition
+{
+    newForm.frame = CGRectMake(20,20, 320, self.view.frame.size.height);
+}
+
+-(void)moveNewFormToCaterForVirtualKeyboard
+{
+    newForm.frame = CGRectMake(20,-KB_HEIGHT, 320, self.view.frame.size.height);
+}
+
+-(BOOL)textViewShouldBeginEditing:(UITextView *)textView
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        [self moveNewFormToCaterForVirtualKeyboard];
+    }];
+    return YES;
+}
+
+-(void)tapScreen // moves frame back down, removes keyboard
+{
+    [newCaption resignFirstResponder];
+    
+    [UIView animateWithDuration:0.2 animations:^{
+        [self moveNewFormToOriginalPosition];
+    }];
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)textView  //moves new frame up as keyboard appears.
+{
+    [UIView animateWithDuration:0.2 animations:^{
+        newForm.frame = CGRectMake(20,-KB_HEIGHT, 280, self.view.frame.size.height);
+    }];
+    
+}
+
 
 -(void)newSelfy
 {
-    
     NSData * imageData = UIImagePNGRepresentation(newImageFrame.image);
     PFFile * imageFile = [PFFile fileWithName:@"image.png" data:imageData]; //file name on Parse, you set it
     PFObject * newSelfy = [PFObject objectWithClassName:@"UserSelfy"];
@@ -150,7 +159,7 @@
 - (void)viewDidLayoutSubviews
 {
     
-  //  [super viewDidLoad]; // what exactly does this do
+    [super viewDidLoad]; // what exactly does this do
     
     UIBarButtonItem * cancelNewSelfyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNewSelfy)];
     
@@ -212,6 +221,8 @@
     
     newImageFrame.image = originalImage;
     newImageFrame.contentMode = UIViewContentModeScaleToFill;
+    
+    filterVC.imageToFilter = originalImage;
 
     NSLog(@"%@",newImageFrame.image);
 }
@@ -219,6 +230,8 @@
 -(void)updateCurrentImageWithFilteredImage:(UIImage *)image
 {
     newImageFrame.image = image;
+    filterVC.imageToFilter = image;
+    
 }
 
 
