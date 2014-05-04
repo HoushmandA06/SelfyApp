@@ -40,14 +40,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
-    self.view.backgroundColor = [UIColor colorWithWhite:.95 alpha:1.0];
+    self.view.backgroundColor = [UIColor blackColor];
 
-  //   [self createForm];
-        
-        
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
+    //added this to get rid of keyboard with a touch on frame outside of the above items
+    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)];
     [self.view addGestureRecognizer:tap];
-        
     }
     return self;
 }
@@ -58,7 +55,7 @@
     newForm = [[UIView alloc] initWithFrame:CGRectMake(20,20,280,self.view.frame.size.height - 40)];
     [self.view addSubview:newForm];
     
-    newCaption = [[UITextView alloc] initWithFrame:CGRectMake(40,250,200,self.view.frame.size.height-380)];
+    newCaption = [[UITextView alloc] initWithFrame:CGRectMake(40,240,200,self.view.frame.size.height-380)];
     newCaption.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
     newCaption.layer.cornerRadius = 6;
     newCaption.delegate = self;
@@ -67,10 +64,10 @@
     [newCaption.layer setBorderWidth: 2.0];
     [newForm addSubview:newCaption];
     
-    //colorWithRed:0.137f green:0.682f blue:1.000f alpha:1.0f
-    //colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0
+    [newCaption resignFirstResponder];
     
-    UIButton * submitNew = [[UIButton alloc] initWithFrame:CGRectMake(40, 300, 200, 40)];
+    
+    UIButton * submitNew = [[UIButton alloc] initWithFrame:CGRectMake(40, 290, 200, 35)];
     submitNew.backgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
     [submitNew setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [submitNew setTitle:@"Submit" forState:UIControlStateNormal];
@@ -78,7 +75,7 @@
     [submitNew addTarget:self action:@selector(newSelfy) forControlEvents:UIControlEventTouchUpInside];
     [newForm addSubview:submitNew];
     
-    newImageFrame = [[UIImageView alloc] initWithFrame:CGRectMake(40,40,200,200)];
+    newImageFrame = [[UIImageView alloc] initWithFrame:CGRectMake(40,30,200,200)];
     newImageFrame.layer.cornerRadius = 6;
     newImageFrame.layer.masksToBounds = YES;
     newImageFrame.contentMode = UIViewContentModeScaleToFill;
@@ -89,15 +86,14 @@
     [newImageFrame.layer setBorderWidth: 2.0];
     [newForm addSubview:newImageFrame];
     
+    filterVC = [[SLFFilterController alloc] initWithNibName:nil bundle:nil];
+    filterVC.delegate = self;
+    filterVC.view.frame = CGRectMake(0, 360, SCREEN_WIDTH, 55);
+    [self.view addSubview:filterVC.view];
+    
     UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
     [self.view addGestureRecognizer:tap];
     
-    
-    filterVC = [[SLFFilterController alloc] initWithNibName:nil bundle:nil];
-    filterVC.delegate = self;
-    filterVC.view.frame = CGRectMake(0, 2, SCREEN_WIDTH, 55);
-    filterVC.view.backgroundColor = BLUE_COLOR;
-    [self.view addSubview:filterVC.view];
 }
 
 #pragma FORM & KEYBOARD ANIMATION
@@ -119,7 +115,7 @@
     return YES;
 }
 
--(void)tapScreen // moves frame back down, removes keyboard
+-(void)tapScreen // moves frame back down, removes keyboard NOT WORKING
 {
     [newCaption resignFirstResponder];
     
@@ -151,15 +147,13 @@
         NSLog(@"%u", succeeded);
         [self cancelNewSelfy];
     }];
-
 }
-
 
 
 - (void)viewDidLayoutSubviews
 {
     
-    [super viewDidLoad]; // what exactly does this do
+    [super viewDidLayoutSubviews]; // what exactly does this do
     
     UIBarButtonItem * cancelNewSelfyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNewSelfy)];
     
@@ -220,6 +214,7 @@
     _originalImage = originalImage;
     
     newImageFrame.image = originalImage;
+    
     newImageFrame.contentMode = UIViewContentModeScaleToFill;
     
     filterVC.imageToFilter = originalImage;
@@ -227,10 +222,9 @@
     NSLog(@"%@",newImageFrame.image);
 }
 
--(void)updateCurrentImageWithFilteredImage:(UIImage *)image
+-(void)updateCurrentImageWithFilteredImage:(UIImage *)image  //updates image in the frame with latest filter selection
 {
     newImageFrame.image = image;
-    filterVC.imageToFilter = image;
     
 }
 
@@ -249,16 +243,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-//- (BOOL) textView: (UITextView*) textView shouldChangeTextInRange: (NSRange) range   // had this to remove UITextView, are using dif way
-//  replacementText: (NSString*) text
-//{
-//    if ([text isEqualToString:@"\n"]) {
-//        [textView resignFirstResponder];
-//        return NO;
-//    }
-//    return YES;
-//}
 
 
 

@@ -146,7 +146,7 @@
             [ai removeFromSuperview];
             NSString * errorDescription = error.userInfo[@"error"];
     
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Username Taken" message:errorDescription delegate:self cancelButtonTitle:@"Try Another Username" otherButtonTitles:nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Username Taken" message:errorDescription delegate:self cancelButtonTitle:@"Try Another Username" otherButtonTitles:nil];  //need to customize per the specific error message
             [alertView show];
             
         }
