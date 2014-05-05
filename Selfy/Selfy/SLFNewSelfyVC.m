@@ -31,6 +31,9 @@
     
     SLFFilterController * filterVC;
     
+    BOOL created;
+
+    
 
 }
 
@@ -51,7 +54,7 @@
 
 -(void)createForm
 {
-    
+    NSLog(@"create");
     newForm = [[UIView alloc] initWithFrame:CGRectMake(20,20,280,self.view.frame.size.height - 40)];
     [self.view addSubview:newForm];
     
@@ -63,9 +66,6 @@
     [newCaption.layer setBorderColor: [[UIColor lightGrayColor] CGColor]];
     [newCaption.layer setBorderWidth: 2.0];
     [newForm addSubview:newCaption];
-    
-    [newCaption resignFirstResponder];
-    
     
     UIButton * submitNew = [[UIButton alloc] initWithFrame:CGRectMake(40, 290, 200, 35)];
     submitNew.backgroundColor = [UIColor colorWithRed:0.0 green:122.0/255.0 blue:1.0 alpha:1.0];
@@ -91,8 +91,7 @@
     filterVC.view.frame = CGRectMake(0, 360, SCREEN_WIDTH, 55);
     [self.view addSubview:filterVC.view];
     
-    UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapScreen)]; //added this to get rid of keyboard with a touch on frame outside of the above items
-    [self.view addGestureRecognizer:tap];
+    created = YES;
     
 }
 
@@ -150,11 +149,8 @@
 }
 
 
-- (void)viewDidLayoutSubviews
+- (void)viewWillLayoutSubviews
 {
-    
-    [super viewDidLayoutSubviews]; // what exactly does this do
-    
     UIBarButtonItem * cancelNewSelfyButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelNewSelfy)];
     
     cancelNewSelfyButton.tintColor = [UIColor whiteColor];
@@ -166,7 +162,9 @@
     addNewSelfyButton.tintColor = [UIColor whiteColor];
     self.navigationItem.leftBarButtonItem = addNewSelfyButton;
 
-    [self createForm];
+    //add bool to only create once
+    
+    if (created == NO) {[self createForm];}
 
 }
 
@@ -184,11 +182,11 @@
 {
     imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
-    imagePicker.allowsEditing = YES; // gives you preview of chosen photo
-  //  imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+//    imagePicker.allowsEditing = YES; // gives you preview of chosen photo
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+//    imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
 
-    imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:imagePicker.sourceType];
+//    imagePicker.mediaTypes = [UIImagePickerController availableMediaTypesForSourceType:imagePicker.sourceType];
     
     [self presentViewController:imagePicker animated:NO completion:nil];
     
@@ -201,7 +199,7 @@
     
     self.originalImage = info[UIImagePickerControllerOriginalImage];
     
-    NSLog(@"%@",self.originalImage);
+//    NSLog(@"%@",self.originalImage);
     
     
     [picker dismissViewControllerAnimated:YES completion:NULL];
@@ -230,11 +228,6 @@
 
 
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
- 
-}
 
 
 - (void)didReceiveMemoryWarning

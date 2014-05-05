@@ -60,9 +60,7 @@
 
 
 - (void)viewWillLayoutSubviews
-{
-    [super viewDidLoad];
-    
+{    
      wh = self.view.frame.size.height - 20;
     
     for (NSString * filterName in filterNames)
@@ -105,7 +103,7 @@
     
     CIImage * ciResult = [filter valueForKeyPath:kCIOutputImageKey];  // get the result of the filtered image
 
-    return [UIImage imageWithCGImage:[ciContext createCGImage:ciResult fromRect:[ciImage extent]]];  // convert back into UIImage
+    return [UIImage imageWithCGImage:[ciContext createCGImage:ciResult fromRect:[ciResult extent]]];  // convert back into UIImage
 }
 
 
